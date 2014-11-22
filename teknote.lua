@@ -3,8 +3,7 @@ function isMember(table, key) return table[key]  ~= nil end
 
 --[[
 --  teknote.lua
---  translate commands in relatively simple micro-language into proper LaTeX math
---  written by A.Bednarsky, EU_Sector#20, 2k14
+--  translate commands in relatively simple micro-language into LaTeX math functions
 --  ]]
 
 
@@ -252,7 +251,7 @@ Symbols = {
 ["succeq"] = "\\succeq ",
 ["!="] = "\\neq ",
 ["neq"] = "\\neq ",
-    --Greek Letters 
+    --GreekLetters 
 ["alpha"] = "\\alpha ",
 ["beta"] = "\\beta ",
 ["Beta"] = "\\beta ",
@@ -309,7 +308,7 @@ Symbols = {
 ["psi"] = "\\psi ",
 ["Omega"] = "\\Omega ",
 ["omega"] = "\\omega ",
-    --Other Symbols 
+    --OtherSymbols 
 ["partial"] = "\\partial ",
 ["eth"] = "\\eth ",
 ["hbar"] = "\\hbar ",
@@ -354,7 +353,7 @@ Symbols = {
 ["lim"] = "\\lim_{",
 ["limit"] = "\\lim_{",
 ["limes"] = "\\lim_{",
-    --Big Commands
+    --BigCommands
 ["int"] = "\\int ",
 ["iint"] = "\\iint",
 ["iiint"] = "\\iiint",
@@ -370,8 +369,7 @@ Symbols = {
 ["level"] = " \\\\ ",
 ["wlevel"] = " \\\\ \\color{white}",
 ["wlvl"] = " \\\\ \\color{white}",
-["endsubstack"] = "",
-["endcases"] = "",
+["endsubstack"] = "}} ",
 ["sum"] = "\\sum ",
 ["limits"] = "\\limits_{",
 ["O+i"] = "\\bigoplus_{ ",
@@ -524,11 +522,9 @@ function FunctionsCentral()
         elseif parts[_] == "ubrace" or parts[_] == "underb" or parts[_] == "underbrace" or parts[_] == "u{" then
             underbrace() 
         elseif parts[_] == "limits" or parts[_] == "intlimits" or parts[_] == "intl" or parts[_] == "ointl" or parts[_] == "ointlimits" or parts[_] == "sum" or parts[_] == "U+i" or parts[_] == "U.i" or parts[_] == "Uxi" or parts[_] == "U*i" or parts[_] == "Setai" or parts[_] == "Set*i" or parts[_] == "Ui" or parts[_] == "prod" or parts[_] == "product" or parts[_] == "limits" then 
-        limited()
+        sumsandlimits()
         elseif parts[_] == "bar" or  parts[_] == "pow" or parts[_] == "overrightarrow" or parts[_] == "power" or parts[_] == "overline" or parts[_] == "overl" or parts[_] == "oline" or parts[_] == "vector" or parts[_] == "vec" or parts[_] == "bigvector" or parts[_] == "bvec" or parts[_] == "bvector" or parts[_] == "bigvec" or parts[_] == "sub" then
             curlyBracedSymbol()
-        elseif parts[_] == "log" or parts[_] == "limes" or parts[_] == "limit" or parts[_] == "limsup" or parts[_] == "liminf" or parts[_] == "binom" or parts[_] == "()" then 
-            doublyCurlyBracedSymbol() 
         elseif parts[_] == "txt" or parts[_] ==  "text" then 
             textrm()
         elseif parts[_] == "boxed" then
@@ -555,6 +551,9 @@ function FunctionsCentral()
             endfractions()
         elseif parts[_] == "lim" then
             limit()
+        elseif parts[_] == "log" or parts[_] == "limes" or parts[_] == "limit" or parts[_] == "limsup" or parts[_] == "liminf" or parts[_] == "binom" or parts[_] == "()" then 
+            doublyCurlyBracedSymbol() 
+        elseif parts[_] == "end" then 
         elseif parts[_] == "expr" or parts[_] == "{{" or parts[_] == ";;" then
             expr()
         elseif parts[_] == "level" or parts[_] == "lvl" then 
@@ -564,9 +563,7 @@ function FunctionsCentral()
         end 
 end
 
--- Checks if symbol is in a dictionary. If it is, then it passes it to FunctionsCentral to see if it's a function invocation.
--- If not, first it makes sure that it's not two capital letters. If this is a case, it passes them to mathbb function. 
--- Else it just adds plain token to the resulting table. 
+
 function addSymbol()
     if isMember(Symbols,parts[_]) then
         FunctionsCentral()
@@ -586,7 +583,7 @@ function addSymbol()
     end
 end
 
---this wraps tokens between { and }, inserting commas in between them
+--this wraps tokens between { and } inserting , in between
 function set()
     table.insert(Aparts, Symbols[parts[_]])
     while _ <= #parts do
@@ -620,7 +617,7 @@ function boxed()
     table.insert(Aparts, "}")
 end
 
---overbrace/underbrace tokens and put text above/below it : overbrace {{ expression }} {{ text }}
+--overbrace/underbrace tokens and put text above it : overbrace {{ expression }} {{ text }}
 function overbrace()
     checkForPrecedingSpace()
     table.insert(Aparts, Symbols[parts[_]])
@@ -657,7 +654,7 @@ function level()
 end
 
 
---determines matrix type 
+--determine matrix type 
 function setmswitch()
             if parts[_] == "(matrix" or parts[_] == "pmatrix" then 
                 mswitcher = 1
@@ -674,7 +671,7 @@ function setmswitch()
             end 
 end
 
---generates matrix from tokens 
+--generate matrix from tokens 
 function matrix()
             setmswitch() 
             table.insert(Aparts, Symbols[parts[_]])
@@ -697,7 +694,7 @@ function matrix()
             closematrix()
 end 
 
---generates matrix with element numeration
+--generate matrix with element numeration
 function amatrix()
             _ = _ + 1
             skipSpaces()
@@ -759,7 +756,7 @@ function closematrix()
 end
 
 
---generates tabular [needs some tinkering]
+--generate tabular [needs overhaul]
 function tabular()
     table.insert(Aparts, Symbols[parts[_]])
     skipSpaces()
@@ -767,7 +764,7 @@ function tabular()
     iterator = _ 
     while Symbols[parts[iterator]] ~= Symbols["level"] do 
         if parts[iterator] == "{{" or parts[iterator] == ";" or parts[iterator] == "expr" then
-            while parts[iterator] ~= ";" and parts[iterator] ~= "end" do 
+            while parts[iterator] ~= ";" and parts[iterator] ~= "end" and parts[iterator] ~= "}}" do 
                 iterator = iterator + 1 
             end
             columns = columns + 1 
@@ -801,8 +798,8 @@ function tabular()
     end
     table.insert(Aparts, Symbols["endtabular"])
 end
+                
 
---begins arbitrary lenght embedded expression
 function expr()
                 while _ <= #parts do 
                     _ = _ + 1 
@@ -814,12 +811,31 @@ function expr()
                 end
 end 
 
---begins cases environment
+function textrm()
+                    table.insert(Aparts,Symbols["textrm"])
+                    while _ <= #parts do 
+                        _ = _ + 1 
+                        if parts[_] == "<" then
+                            table.insert(Aparts, "\\textless ")
+                        elseif parts[_] == ">" then 
+                            table.insert(Aparts, "\\textgreater ") 
+                        elseif parts[_] == "|" then 
+                            table.insert(Aparts, "\\textbar ")
+                        elseif parts[_] == "end" or parts[_] == "level" then
+                            break
+                        else
+                                addSymbol()
+                                table.insert(Aparts, " ")
+                        end
+                    end 
+                    table.insert(Aparts, "}")
+end
+
 function cases()
             table.insert(Aparts, Symbols[parts[_]])
             while _ <= #parts do 
                 _ = _ + 1 
-                if parts[_] == "end" or parts[_] == ";" or parts[_] == "endcases" then 
+                if parts[_] == "end" or parts[_] == ";" then 
                         break
                 elseif parts[_] == "level" or parts[_] == "lvl" or parts[_] == "\\\\" then
                     table.insert(Aparts, Symbols["level"])
@@ -834,12 +850,12 @@ function cases()
             table.insert(Aparts, "\\end{cases}")
 end 
 
---adds substack beneath token
-function substack()
+
+function substack() 
             table.insert(Aparts, Symbols[parts[_]])
                 while _ <= #parts do
                     _ = _ + 1 
-                    if parts[_] == "end" or parts[_] == ";" or parts[_] == "endsubstack" then
+                    if parts[_] == "end" or parts[_] == ";" then
                         break
                     elseif parts[_] == "level" or parts[_] == "lvl" or parts[_] == "\\\\" then
                         table.insert(Aparts, Symbols["level"])
@@ -849,10 +865,9 @@ function substack()
                     end
                 end
                 checkForPrecedingSpace()
-            table.insert(Aparts, "}} ")
+            table.insert(Aparts, Symbols["endsubstack"])
 end
 
---begins and ends a comment
 function comment()
     while _ <= #parts do
         _ = _ + 1
@@ -862,9 +877,7 @@ function comment()
         end
     end
 end
-
---here goes everything starting with some initial condition and ending at some limit, like sums and products
-function limited() 
+function sumsandlimits() 
             table.insert(Aparts, Symbols[parts[_]])
             _ = _ + 1 
             skipSpaces()
@@ -877,7 +890,7 @@ function limited()
 end
 
 
---makes root of any depth
+-- Probably 
 function root() 
             table.insert(Aparts, Symbols[parts[_]])
             _ = _ + 1 
@@ -889,7 +902,7 @@ function root()
             addSymbol()
             table.insert(Aparts, "}")
 end
---makes square root
+
 function sqrt()
         table.insert(Aparts, Symbols[parts[_]])
             table.insert(Aparts, "]{")
@@ -920,9 +933,8 @@ function endfractions()
             end
             confrac = false
 end
+-- End of continous fractions block
 
-
---here goes everything that takes one additional argument, like overarrows
 function curlyBracedSymbol()
     checkForPrecedingSpace()
     table.insert(Aparts, Symbols[parts[_]])
@@ -932,7 +944,6 @@ function curlyBracedSymbol()
     table.insert(Aparts, "}")
 end 
 
---here goes everything that takes two additional arguments, like binomials
 function doublyCurlyBracedSymbol()
     checkForPrecedingSpace()
     skipSpaces()
@@ -947,7 +958,6 @@ function doublyCurlyBracedSymbol()
             table.insert(Aparts, "}")
 end 
 
---this makes a limit for a first argument going to second argument
 function limit()
     checkForPrecedingSpace()
     skipSpaces()
@@ -962,21 +972,16 @@ function limit()
     table.insert(Aparts, "}")
 end
 
---here goes every token consisting of two capital letters
 function mathbb()
     table.insert(Aparts, "\\mathbb{")
     table.insert(Aparts,parts[_]:sub(1,1))
     table.insert(Aparts, "}")
     _ = _ + 1
 end
-
---setting up env
 color = nil
 spaces = true
 tabs = true 
 newlines = true 
-
--- iterate through console arguments table
 local i = 1
 while i <= #arg do   
         if arg[i] == "-c" or arg[i] == "--color" then
@@ -993,14 +998,11 @@ while i <= #arg do
             print("-nn, --nonewlines\n\tDisable automatic adding of \\\\. Use \"lvl\", \"level\" or manually insert \\\\ instead.\n-nt, --notabs\n\t Disable automatic adding of \\qquad. Use \"tab\", or manually insert \\qquad instead.\n-ns, --nospaces\n\tDisable automatic adding of \\:, use \"[]\" \"txt\",\"text\" or manually insert \\: instead. \n-h, --help\n\tDisplay this help message. \n-us, --usage\n\tPrint usage guide.\n-dy, --dictionary\n\tPrint list defined symbols.")
             os.exit(0)
         elseif arg[i] == "-us" or arg[i] == "--usage" then 
-            print("Special tokens: \n . - line containing only a single dot signals end of expression.\n## - signals beginning of a comment. Script ignores every next token until it encounters another ## \nexpr,{{, ;; - place function as an argument for other function.\nend,}},; - end last opened function. \nFunctions:\nmatrix rows end -- generate matrices.\nMatrix types: matrix, (matrix, {matrix, [matrix, |matrix, ||matrix\namatrix matrix_type element number_a number_b end - generate matrices with element numeration\ncases lines end - generate cases\nsub token, substack lines end - adds sub-value to the token\npow, ^ - rises token to the power of value\nlog a b - generates log\nroot a b - generates root\nbinom a b, () a b - generates binomial\nlim expr - generates limit\nsum start upperbound, prod start upperbound - generates sum or product\n// a b endfractions, fraction a b endf, cfrac a b endf - generates continous fractions\nboxed tokens end - puts a box around text\nunderbrace {{ tokens }} {{ text }} end, overbrace {{ tokens }} {{ text }} end - puts underbrace/overbrace above/beneath token.")
+            print("Special tokens: \n . - line containing only a single dot signals end of expression.\nexpr,{{, ;; - place function as an argument for other function.\nend,}},; - end last opened function. \nFunctions:\nmatrix rows end -- generate matrices.\nMatrix types: matrix, (matrix, {matrix, [matrix, |matrix, ||matrix\namatrix matrix_type element number_a number_b end - generate matrices with element numeration\ncases lines end - generate cases\nsub token, substack lines end - adds sub-value to the token\npow, ^ - rises token to the power of value\nlog a b - generates log\nroot a b - generates root\nbinom a b, () a b - generates binomial\nlim expr - generates limit\nsum start upperbound, prod start upperbound - generates sum or product\n// a b endfractions, fraction a b endf, cfrac a b endf - generates continous fractions\ntxt tokens end ,text tokens end - generates plain text\nboxed tokens end - puts a box around text\nunderbrace token text end, overbrace token text end - puts underbrace/overbrace above/beneath token. Text as expr ... end")
             os.exit(0)
         elseif arg[i] == "-dy" or arg[i] == "--dictionary" then
             dictionary()
             os.exit(0)
-        else
-            print("Unrecognized option. Use --help for more info")
-            os.exit(1)
         end
         i = i + 1
 end
@@ -1012,7 +1014,6 @@ if color then
 else
     Answer = ""
 end
-
 -- Global variables 
 parts = {};  -- User input tokens 
 Aparts = {}; -- Resulting answer tokens 
@@ -1020,12 +1021,9 @@ fracn = 0; -- Number of continous fractions.
 confrac = false; -- Are there not yet closed continous fractions? 
 mswitcher = 0; -- Matrix type 
 _ = 0; -- MOST IMPORTANT VARIABLE 
-End_Of_Expression = "." --default EOF sign
-
+End_Of_Expression = "."
 print("Insert expression: \n\n");
 local lines = {}
-
---read input
 while true do 
     expression = io.read("*l");
     if expression == End_Of_Expression then 
@@ -1100,9 +1098,8 @@ end
 _ = 0 
 
 
---iterate through table of tokens, make answer table out of it
---
-while _ <= #parts do
+
+while _ <= #parts do  
     _ = _ + 1
     if confrac then
         skipSpaces()
@@ -1111,14 +1108,12 @@ while _ <= #parts do
         end
     end
     addSymbol()
-end
-
---check for hanging continous fractions
+end 
+ 
 if confrac == true then 
 endfractions()
 end
 
---build final result
 Answer = Answer .. table.concat(Aparts)
 print("Resulting expression: \n\n")
 print(Answer)
