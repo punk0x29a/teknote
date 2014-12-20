@@ -4,6 +4,7 @@ function isMember(table, key) return table[key]  ~= nil end
 --[[
 --  teknote.lua
 --  translate commands in relatively simple micro-language into LaTeX math functions
+--  made by A.Bednarsky, UE Sector 20, KRK, 2k14
 --  ]]
 
 
@@ -50,13 +51,21 @@ Symbols = {
 ["And"] = "\\bigwedge ",
 ["bigwedge"] = "\\bigwedge ",
 ["diamond"] = "\\diamond ",
-["bigtriangleup"] = "\\bigtraingleup ",
+["bigtriangleup"] = "\\bigtriangleup ",
+["/_\\"] = "\\bigtriangleup ",
+["btu"] = "\\bigtriangleup ",
+["bu"] = "\\bigtriangleup ",
 ["btd"] = "\\bigtriangledown ",
+["\\-/"] = "\\bigtriangledown ",
+["bd"] = "\\bigtriangledown ",
 ["bigtriangledown"] = "\\bigtriangledown ",
 ["tl"] = "\\triangleleft ",
+["<|"] = "\\triangleleft ",
 ["triangleleft"] = "\\triangleleft ",
+["|>"] = "\\triangleright ",
 ["tr"] = "\\triangleright ",
 ["triangleright"] = "\\triangleright ",
+["O"] = "\\bigcirc ",
 ["bc"] = "\\bigcirc ",
 ["bigcirc"] = "\\bigcirc ",
 ["bigcircle"] = "\\bigcircle ", 
@@ -92,6 +101,7 @@ Symbols = {
 ["fora"] = "\\forall ",
 ["not"] = "\\neg ",
 ["!"] = "\\neg ",
+["!!"] = " ! ",
 ["neg"] = "\\neg ",
 ["and"] = "\\land ",
 ["land"] = "\\land ",
@@ -218,6 +228,7 @@ Symbols = {
 ["nsubseteq"] = "\\nsubseteq ",
 ["subset!="] = "\\nsubseteq ",
 ["!=supset"] = "\\nsupseteq ",
+["!subset"] = "\\nsubset ",
 ["!=superset"] = "\\nsupseteq ",
 ["nsupseteq"] = "\\nsupseteq ",
 ["nsuperseteq"] = "\\nsupseteq ",
@@ -387,7 +398,11 @@ Symbols = {
 ["bigsor"] = "\\bigcup ",
 ["bigsetor"] = "\\bigcup ",
 ["Ui"] = "\\bigcup_{ ",
+["Setori"] = "\\bigcup_{",
+["Set+i"] = "\\bigcup_{",
 ["U"] = "\\bigcup ",
+["Setor"] = "\\bigcup ",
+["Set+"] = "\\bigcup ",
 ["Seta"] = "\\bigcap",
 ["Setai"] = "\\bigcap_{",
 ["Set*"]= "\\bigcap",
@@ -520,8 +535,8 @@ function FunctionsCentral()
         elseif parts[_] == "##" then
             comment()
         elseif parts[_] == "ubrace" or parts[_] == "underb" or parts[_] == "underbrace" or parts[_] == "u{" then
-            underbrace() 
-        elseif parts[_] == "limits" or parts[_] == "intlimits" or parts[_] == "intl" or parts[_] == "ointl" or parts[_] == "ointlimits" or parts[_] == "sum" or parts[_] == "U+i" or parts[_] == "U.i" or parts[_] == "Uxi" or parts[_] == "U*i" or parts[_] == "Setai" or parts[_] == "Set*i" or parts[_] == "Ui" or parts[_] == "prod" or parts[_] == "product" or parts[_] == "limits" then 
+            underbrace()
+        elseif parts[_] == "limits" or parts[_] == "intlimits" or parts[_] == "intl" or parts[_] == "ointl" or parts[_] == "ointlimits" or parts[_] == "sum" or parts[_] == "U+i" or parts[_] == "U.i" or parts[_] == "Uxi" or parts[_] == "U*i" or parts[_] == "Setai" or parts[_] == "Set*i" or parts[_] == "Ui" or parts[_] == "Setori" or parts[_] == "Set+i" or parts[_] == "prod" or parts[_] == "product" or parts[_] == "limits" then 
         sumsandlimits()
         elseif parts[_] == "bar" or  parts[_] == "pow" or parts[_] == "overrightarrow" or parts[_] == "power" or parts[_] == "overline" or parts[_] == "overl" or parts[_] == "oline" or parts[_] == "vector" or parts[_] == "vec" or parts[_] == "bigvector" or parts[_] == "bvec" or parts[_] == "bvector" or parts[_] == "bigvec" or parts[_] == "sub" then
             curlyBracedSymbol()
