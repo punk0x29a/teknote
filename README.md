@@ -144,6 +144,7 @@ amatrix matrix a 1 1 a 1 2 ... a 1 n·
 a 2 1 a 2 2 ... a 2 n·
 v... v... d... v...
 a m 1 a m 2 ... a m n
+.
 
 ```
 
