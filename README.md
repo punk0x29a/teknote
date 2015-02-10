@@ -422,6 +422,27 @@ that renders to
 
 while less and more operators are presented as `>=` and `=<`
 
+Other, less used operators, are (mostly) straightforward as well:
+
+```
+alpha o. beta = a and not b or not a and b
+alpha ox beta = a or not b and not a or b
+A O. B = A \ B set+ B \ A
+A Ox  B = A set+ B' set* B set+ A'
+```
+
+translates to
+
+
+```
+\alpha \: \odot \: \beta \: =\: a\: \land \: \neg \: b\: \lor \: \neg \: a\: \land \: b \\ \alpha \: \otimes \: \beta \: =\: a\: \lor \: \neg \: b\: \land \: \neg \: a\: \lor \: b \\ A\: \bigodot \: B\: =\: A\: \setminus \: B\: \cup \: B\: \setminus \: A \\ A\: \bigotimes \: \: B\: =\: A\: \cup \: B'\: \cap \: B\: \cup \: A' \\
+```
+
+and gives:
+
+![Arrows](https://raw.githubusercontent.com/punk0x29a/teknote/master/images/odot.jpg?raw=true "Weird operators")
+
+
 
 #### That's about it 
 
