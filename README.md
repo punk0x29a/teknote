@@ -140,16 +140,17 @@ and, consequently
 `amatrix` must be followed by a matrix type. 
 
 ```
-amatrix matrix a 1 1 a 1 2 ... a 1 n 
-a 2 1 a 2 2 ... a 2 n 
-v... v... v... v...
+amatrix matrix a 1 1 a 1 2 ... a 1 n·
+a 2 1 a 2 2 ... a 2 n·
+v... v... d... v...
 a m 1 a m 2 ... a m n
+
 ```
 
 gives 
 
 ```
-\begin{matrix} a_{1,1} & a_{1,2} & \cdots  & a_{1,n} \\ a_{2,1} & a_{2,2} & \cdots  & a_{2,n} \\ \vdots  & \vdots  & \vdots  & \vdots  \\ a_{m,1} & a_{m,2} & \cdots  & a_{m,n}\end{matrix}
+\begin{matrix} a_{1,1} & a_{1,2} & \cdots  & a_{1,n·} \\ a_{2,1} & a_{2,2} & \cdots  & a_{2,n·} \\ \vdots  & \vdots  & \ddots  & \vdots  \\ a_{m,1} & a_{m,2} & \cdots  & a_{m,n}\end{matrix}
 ```
 
 which renders to 
