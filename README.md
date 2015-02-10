@@ -37,7 +37,7 @@ It's highly recommended to make separate function in, for example, ~/.bashrc :
 ```
 function teknote()
 {
-            vim ~/.math_expression && lua52 ~/path/to/latexnote.lua < ~/.math_expression·
+            vim ~/.math_expression && lua52 ~/path/to/latexnote.lua < ~/.math_expression
 }
 ```
 Where `~/path/to/latexnote.lua` must be replaced with TekNote's real location.
@@ -140,8 +140,8 @@ and, consequently
 `amatrix` must be followed by a matrix type. 
 
 ```
-amatrix matrix a 1 1 a 1 2 ... a 1 n·
-a 2 1 a 2 2 ... a 2 n·
+amatrix matrix a 1 1 a 1 2 ... a 1 n
+a 2 1 a 2 2 ... a 2 n
 v... v... d... v...
 a m 1 a m 2 ... a m n
 .
@@ -151,7 +151,7 @@ a m 1 a m 2 ... a m n
 gives 
 
 ```
-\begin{matrix} a_{1,1} & a_{1,2} & \cdots  & a_{1,n·} \\ a_{2,1} & a_{2,2} & \cdots  & a_{2,n·} \\ \vdots  & \vdots  & \ddots  & \vdots  \\ a_{m,1} & a_{m,2} & \cdots  & a_{m,n}\end{matrix}
+\begin{matrix} a_{1,1} & a_{1,2} & \cdots  & a_{1,n} \\ a_{2,1} & a_{2,2} & \cdots  & a_{2,n} \\ \vdots  & \vdots  & \ddots  & \vdots  \\ a_{m,1} & a_{m,2} & \cdots  & a_{m,n}\end{matrix}
 ```
 
 which renders to 
@@ -167,8 +167,8 @@ Altough this function needs some attention in order to make it more viable, it's
 
 ```
 tabular phi {{ 0 pow o }} {{ 30 pow o }} {{ 45 pow o }} {{ 60 pow o }} {{ 90 pow o }}
-{{ sin phi }} 0 {{ ( 1 / 2 ) }} {{ ( 1 / sqrt 2 ) }} {{ ( sqrt 3 / 2 ) }} 1 
-{{ cos phi }} 1 {{ ( sqrt 3 / 2 ) }} {{ ( 1 / sqrt 2 ) }} {{ ( 1 / 2 ) }} 0 
+{{ sin phi }} 0 {{ ( 1 / 2 ) }} {{ ( 1 / sqrt 2 ) }} {{ ( sqrt 3 / 2 ) }} 1
+{{ cos phi }} 1 {{ ( sqrt 3 / 2 ) }} {{ ( 1 / sqrt 2 ) }} {{ ( 1 / 2 ) }} 0
 .
 ```
 
@@ -191,8 +191,8 @@ and, consequently
 
 
 ```
-f(x) = cases 1  if x < 0 
-0   if x = 0 
+f(x) = cases 1  if x < 0
+0   if x = 0
 -1  if x > 0
 ```
 
@@ -212,16 +212,16 @@ that renders to:
 These seem to be self-explanatory.
 
 ```
-e pow {{ x pow 2 }} 
+e pow {{ x pow 2 }}
 ```
 
 gives 
 
 ```
-e^{\: x^{2}\: } 
+e^{\: x^{2}\: }
 ```
 
-that renders to 
+that renders to
 
 ![E](https://raw.githubusercontent.com/punk0x29a/teknote/master/images/ex.jpg?raw=true "e to the power of x")
 
@@ -242,7 +242,7 @@ that renders to
 ![X](https://raw.githubusercontent.com/punk0x29a/teknote/master/images/xzero.jpg?raw=true "Where function meets x-axis") 
 
 
-Those can be combined: 
+Those can be combined:
 
 ```
 alpha sub beta pow gamma = gamma pow beta sub alpha
@@ -251,7 +251,7 @@ alpha sub beta pow gamma = gamma pow beta sub alpha
 gives
 
 ```
-\alpha _{\beta }^{\gamma }\: =\: \gamma ^{\beta }_{\alpha } 
+\alpha _{\beta }^{\gamma }\: =\: \gamma ^{\beta }_{\alpha }
 ```
 
 that renders to
@@ -267,7 +267,7 @@ k=0 end oo n pow k
 .
 ```
 
-gives 
+gives
 
 ```
 \sum_{_{\substack{n=1 \\ k=0}} }^{\infty }\: n^{k}
@@ -278,7 +278,7 @@ that renders to:
 ![Substack](https://raw.githubusercontent.com/punk0x29a/teknote/master/images/substack.jpg?raw=true "Substack Example")
 
 
-##### Limit (including Integral with limits), Binomial, Root, Sum, Product and Logarithm 
+##### Limit (including Integral with limits), Binomial, Root, Sum, Product and Logarithm
 
 They all work pretty much the same. One needs to enter a and b factor, followed by an expression.
 Here's a big example:
