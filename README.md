@@ -295,6 +295,7 @@ root 3 27 = 3
 lim x oo ( x ^ 2  / x ^ 2 + 1 ) = 1
 sum x=0 oo x = oo
 prod x=0 -oo x = 0
+.
 
 ```
 
@@ -318,6 +319,7 @@ Fractions are abbreviated as follows:
 
 ```
 ( x / (( x pow 2 + 1 )) pow 2 )
+.
 ```
 
 gives
