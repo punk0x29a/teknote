@@ -112,9 +112,9 @@ gives
 \begin{matrix} a & b & c \\ d & e & f \\ g & h & i\end{matrix}
 ```
 
-and, consequntly 
+and, consequently 
 
-![alt text](https://github.com/punk0x29a/teknote/images/simplematrix.png "Simple Matrix")
+![alt text](https://github.com/punk0x29a/teknote/tree/master/images/simplematrix.png "Simple Matrix")
 
 For more complicated example:
 
@@ -133,7 +133,7 @@ will give
 
 and, consequently
 
-![alt text](https://github.com/punk0x29a/teknote/images/fancymatrix.png "Fancy Matrix")
+![alt text](https://github.com/punk0x29a/teknote/tree/master/images/fancymatrix.png "Fancy Matrix")
 
 
 `amatrix` is a special type of matrix, because it features element numeration.
@@ -154,7 +154,7 @@ gives
 
 which renders to 
 
-![alt text](https://github.com/punk0x29a/teknote/images/numeratedmatrix.png "Numerated Matrix")
+![alt text](https://github.com/punk0x29a/teknote/tree/master/images/numeratedmatrix.png "Numerated Matrix")
 
 
 
@@ -180,7 +180,7 @@ gives
 
 and, consequently
 
-![alt text](https://github.com/punk0x29a/teknote/images/trigtabular.png "Tabular for sin and cos")
+![alt text](https://github.com/punk0x29a/teknote/tree/master/images/trigtabular.png "Tabular for sin and cos")
 
 
 ##### Cases:
@@ -202,7 +202,7 @@ f(x)\: =\: \begin{cases} 1\: \qquad if\: x\: <\: 0 \\ 0\qquad if\: x\: =\: 0 \\ 
 
 that renders to:
 
-![alt text](https://github.com/punk0x29a/teknote/images/cases.png "Cases Example")
+![alt text](https://github.com/punk0x29a/teknote/tree/master/images/cases.png "Cases Example")
 
 
 ##### Sub, Pow and Substack
@@ -221,7 +221,7 @@ e^{\: x^{2}\: }
 
 that renders to 
 
-![alt text](https://github.com/punk0x29a/teknote/images/ex.png "e to the power of x")
+![alt text](https://github.com/punk0x29a/teknote/tree/master/images/ex.png "e to the power of x")
 
 Similarly,
 
@@ -237,7 +237,7 @@ x_{0}\: =\: 1
 
 that renders to
 
-![alt text](https://github.com/punk0x29a/teknote/images/xzero.png "Where function meets x-axis") 
+![alt text](https://github.com/punk0x29a/teknote/tree/master/images/xzero.png "Where function meets x-axis") 
 
 
 Those can be combined: 
@@ -254,7 +254,7 @@ gives
 
 that renders to
 
-![alt text](https://github.com/punk0x29a/teknote/images/subpow.png "Fancy example")
+![alt text](https://github.com/punk0x29a/teknote/tree/master/images/subpow.png "Fancy example")
 
 
 Example substack usage:
@@ -273,7 +273,7 @@ gives
 
 that renders to:
 
-![alt text](https://github.com/punk0x29a/teknote/images/substack.png "Substack Example")
+![alt text](https://github.com/punk0x29a/teknote/tree/master/images/substack.png "Substack Example")
 
 
 ##### Limit (including Integral with limits), Binomial, Root, Sum, Product and Logarithm 
@@ -300,7 +300,7 @@ translates to
 
 which gives
 
-![alt text](https://github.com/punk0x29a/teknote/images/bigexample.png "Big Example")
+![alt text](https://github.com/punk0x29a/teknote/tree/master/images/bigexample.png "Big Example")
 
 
 ##### Fractions and parentheses 
@@ -321,7 +321,7 @@ gives
 ```
 that renders to
 
-![alt text](https://github.com/punk0x29a/teknote/images/frac1.png "Example Fraction")
+![alt text](https://github.com/punk0x29a/teknote/tree/master/images/frac1.png "Example Fraction")
 
 Such a fraction must be bound by single parentheses in every case. 
 
@@ -340,7 +340,7 @@ gives
 
 that renders to:
 
-![alt text](https://github.com/punk0x29a/teknote/images/frac2.png "Example Fraction")
+![alt text](https://github.com/punk0x29a/teknote/tree/master/images/frac2.png "Example Fraction")
 
 
 If continous fraction is present in the middle of an expression, one must end it with `endfractions` token. 
@@ -360,7 +360,7 @@ gives
 
 that renders to
 
-![alt text](https://github.com/punk0x29a/teknote/images/complex.png "Complex Number")
+![alt text](https://github.com/punk0x29a/teknote/tree/master/images/complex.png "Complex Number")
 
 
 ##### Some set theory and math blackboard
@@ -376,7 +376,7 @@ gives
 ```
 that renders to
 
-![alt text](https://github.com/punk0x29a/teknote/images/set1.png "Such a set...")
+![alt text](https://github.com/punk0x29a/teknote/tree/master/images/set1.png "Such a set...")
 
 As for sets, there is a set form that automates sets declaration:
 
@@ -397,7 +397,7 @@ A\: =\: \{a,b,c\} \\ B\: =\: \{c,d,e\} \\ A\: \cap \: B\: =\: \{c\}\: =\: (\: A\
 
 and, conclusively
 
-![alt text](https://github.com/punk0x29a/teknote/images/set2.png "Such a set...")
+![alt text](https://github.com/punk0x29a/teknote/tree/master/images/set2.png "Such a set...")
 
 
 Most of set theory operators, such as arrows, are available in almost ascii-art, straightforward form:
@@ -415,7 +415,7 @@ A\: \subset \: B\: \equiv \: x\: \in \: A\: \Rightarrow \: x\: \in \: B \\
 
 that renders to
 
-![alt text](https://github.com/punk0x29a/teknote/images/arrows.png "Arrows...")
+![alt text](https://github.com/punk0x29a/teknote/tree/master/images/arrows.png "Arrows...")
 
 
 while less and more operators are presented as `>=` and `=<`
