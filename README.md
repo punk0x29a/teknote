@@ -135,6 +135,7 @@ will give
 and, consequently
 
 ![Fancy Matrix](https://github.com/punk0x29a/teknote/tree/master/images/fancymatrix.png?raw=true "Fancy Matrix")
+![Matrix](https://raw.githubusercontent.com/punk0x29a/teknote/tree/master/images/simplematrix.png?raw=true "Simple Matrix")
 
 
 `amatrix` is a special type of matrix, because it features element numeration.
