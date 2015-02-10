@@ -47,7 +47,7 @@ Where `~/path/to/latexnote.lua` must be replaced with TekNote's real location.
 Such a function will 
 + Enter text editor, where one will edit temporary file
 + Redirect resulting file as input for TekNote 
-TekNote will then give back results ready for copy and paste into the renderer.
++ TekNote will then give back results ready for copy and paste into the renderer.
 
 #### Command Line Options:
 
