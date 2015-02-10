@@ -114,7 +114,7 @@ gives
 
 and, consequently 
 
-![(https://github.com/punk0x29a/teknote/tree/master/images/simplematrix.png?raw=true "Simple Matrix")]
+![Matrix](/tree/master/images/simplematrix.png?raw=true "Simple Matrix")
 
 For more complicated example:
 
