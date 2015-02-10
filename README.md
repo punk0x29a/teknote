@@ -194,6 +194,7 @@ and, consequently
 f(x) = cases 1  if x < 0
 0   if x = 0
 -1  if x > 0
+.
 ```
 
 translates to 
@@ -213,6 +214,7 @@ These seem to be self-explanatory.
 
 ```
 e pow {{ x pow 2 }}
+.
 ```
 
 gives 
@@ -229,6 +231,7 @@ Similarly,
 
 ```
 x sub 0 = 1
+.
 ```
 
 gives
@@ -246,6 +249,7 @@ Those can be combined:
 
 ```
 alpha sub beta pow gamma = gamma pow beta sub alpha
+.
 ```
 
 gives
