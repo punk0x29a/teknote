@@ -61,7 +61,7 @@ It's good to read through it, because most of the functions have some redundant 
 #### Basics:
 
 TekNote expression consists of tokens separated by spaces. 
-Separate text editor with a feature of showing hidden symbols is very useful to track them.
+Text editor with a feature of showing hidden symbols is very useful to track them.
 
 There are three types of special tokens:
 
