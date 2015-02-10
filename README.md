@@ -332,6 +332,7 @@ As for continous fractions:
 
 ```
 // a b + // c d + // e f + // g h
+.
 ```
 
 gives
@@ -352,6 +353,7 @@ If continous fraction is present in the middle of an expression, one must end it
 
 ```
 overbrace {{ underbrace x Re + underbrace i*y Im }} {{ Complex Number }}
+.
 ```
 
 gives 
@@ -371,6 +373,7 @@ Entering two same capital letters in a row gives back mathbb form:
 
 ```
 Gamma = { forall x in RR : x > 1 }
+.
 ```
 gives
 ```
@@ -395,6 +398,7 @@ gives
 
 ```
 A\: =\: \{a,b,c\} \\ B\: =\: \{c,d,e\} \\ A\: \cap \: B\: =\: \{c\}\: =\: (\: A\: \cup \: B\: )\: \setminus \: \{a,b,d,e\} \\ 
+
 ```
 
 and, conclusively
@@ -407,12 +411,14 @@ Most of set theory operators, such as arrows, are available in almost ascii-art,
 
 ```
 A subset B == x in A => x in B
+.
 ```
 
-gives 
+gives
 
 ```
-A\: \subset \: B\: \equiv \: x\: \in \: A\: \Rightarrow \: x\: \in \: B \\ 
+A\: \subset \: B\: \equiv \: x\: \in \: A\: \Rightarrow \: x\: \in \: B \\
+.
 ```
 
 that renders to
@@ -429,6 +435,7 @@ alpha o. beta = a and not b or not a and b
 alpha ox beta = a or not b and not a or b
 A O. B = A \ B set+ B \ A
 A Ox  B = A set+ B' set* B set+ A'
+.
 ```
 
 translates to
