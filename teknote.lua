@@ -4,7 +4,6 @@ function isMember(table, key) return table[key]  ~= nil end
 --[[
 --  teknote.lua
 --  translate commands in relatively simple micro-language into LaTeX math functions
---  made by A.Bednarsky, UE Sector 20, KRK, 2k14
 --  ]]
 
 
@@ -63,7 +62,6 @@ Symbols = {
 ["<|"] = "\\triangleleft ",
 ["triangleleft"] = "\\triangleleft ",
 ["|>"] = "\\triangleright ",
-["tr"] = "\\triangleright ",
 ["triangleright"] = "\\triangleright ",
 ["O"] = "\\bigcirc ",
 ["bc"] = "\\bigcirc ",
@@ -450,6 +448,7 @@ Symbols = {
 ["endtabular"] = "\\end{array} ", 
 ["hline"] = " \\\\ \\hline ", 
 ["pow"] = "^{",
+["^"] = "^{",
 ["power"] = "^{",
 ["sub"] = "_{",
 ["vec"] = "\\vec{",
@@ -538,7 +537,7 @@ function FunctionsCentral()
             underbrace()
         elseif parts[_] == "limits" or parts[_] == "intlimits" or parts[_] == "intl" or parts[_] == "ointl" or parts[_] == "ointlimits" or parts[_] == "sum" or parts[_] == "U+i" or parts[_] == "U.i" or parts[_] == "Uxi" or parts[_] == "U*i" or parts[_] == "Setai" or parts[_] == "Set*i" or parts[_] == "Ui" or parts[_] == "Setori" or parts[_] == "Set+i" or parts[_] == "prod" or parts[_] == "product" or parts[_] == "limits" then 
         sumsandlimits()
-        elseif parts[_] == "bar" or  parts[_] == "pow" or parts[_] == "overrightarrow" or parts[_] == "power" or parts[_] == "overline" or parts[_] == "overl" or parts[_] == "oline" or parts[_] == "vector" or parts[_] == "vec" or parts[_] == "bigvector" or parts[_] == "bvec" or parts[_] == "bvector" or parts[_] == "bigvec" or parts[_] == "sub" then
+        elseif parts[_] == "bar" or  parts[_] == "pow" or parts[_] == "^" or parts[_] == "overrightarrow" or parts[_] == "power" or parts[_] == "overline" or parts[_] == "overl" or parts[_] == "oline" or parts[_] == "vector" or parts[_] == "vec" or parts[_] == "bigvector" or parts[_] == "bvec" or parts[_] == "bvector" or parts[_] == "bigvec" or parts[_] == "sub" then
             curlyBracedSymbol()
         elseif parts[_] == "txt" or parts[_] ==  "text" then 
             textrm()
@@ -598,25 +597,6 @@ function addSymbol()
     end
 end
 
---this wraps tokens between { and } inserting , in between
-function set()
-    table.insert(Aparts, Symbols[parts[_]])
-    while _ <= #parts do
-        _ = _ + 1
-        if parts[_] == "end" or parts[_] == "level" or parts[_] == ";" then 
-            break
-        end
-        skipSpaces()
-        addSymbol()
-            if _+1 <= #parts then
-                if parts[_+1] ~= "end" and parts[_+1] ~= "level" and parts[_+1] ~= ";" then 
-                    table.insert(Aparts, ",")
-                end
-            end
-    end
-    table.insert(Aparts, "\\}")
-end
-
 --put a box around text
 function boxed()
     table.insert(Aparts, Symbols[parts[_]])
@@ -632,6 +612,39 @@ function boxed()
     table.insert(Aparts, "}")
 end
 
+--this wraps tokens between { and } inserting , in between
+function set()
+    waslevel = 0;
+    table.insert(Aparts, Symbols[parts[_]])
+    while _ <= #parts do
+        _ = _ + 1
+        if parts[_] == "end" or parts[_] == "level" or parts[_] == "}}" then 
+            if parts[_] == "level" then
+                waslevel=1;
+                break;
+            else
+                break
+            end
+        else 
+            skipSpaces()
+            addSymbol()
+            if _+2 <= #parts then
+                skipSpaces()
+                if parts[_+2] == "end" or parts[_+2] == "level" or parts[_+2] == "}}" then 
+                    _ = _ + 1
+                else
+                    table.insert(Aparts, ",")
+                    _ = _ + 1
+                end
+            end
+        end
+    end
+            table.insert(Aparts, "\\}")
+    if waslevel == 1 then
+                table.insert(Aparts, Symbols["level"]);
+            end
+end
+
 --overbrace/underbrace tokens and put text above it : overbrace {{ expression }} {{ text }}
 function overbrace()
     checkForPrecedingSpace()
@@ -639,7 +652,7 @@ function overbrace()
     _ = _ + 1 
     skipSpaces()
     addSymbol()
-    table.insert(Aparts, "}^\\text{")
+    table.insert(Aparts, "}^{")
     _ = _ + 1 
     skipSpaces()
     addSymbol()
@@ -692,7 +705,7 @@ function matrix()
             table.insert(Aparts, Symbols[parts[_]])
             while _ <= #parts do 
                 _ = _ + 1
-                if parts[_] == ";" or parts[_] == "end" then
+                if parts[_] == ";" or parts[_] == "end" or _ == #parts then
                     break
                 end
                 if parts[_] == "level" or parts[_] == "lvl" or parts[_] == "\\\\" then
@@ -813,7 +826,6 @@ function tabular()
     end
     table.insert(Aparts, Symbols["endtabular"])
 end
-                
 
 function expr()
                 while _ <= #parts do 
@@ -1013,7 +1025,7 @@ while i <= #arg do
             print("-nn, --nonewlines\n\tDisable automatic adding of \\\\. Use \"lvl\", \"level\" or manually insert \\\\ instead.\n-nt, --notabs\n\t Disable automatic adding of \\qquad. Use \"tab\", or manually insert \\qquad instead.\n-ns, --nospaces\n\tDisable automatic adding of \\:, use \"[]\" \"txt\",\"text\" or manually insert \\: instead. \n-h, --help\n\tDisplay this help message. \n-us, --usage\n\tPrint usage guide.\n-dy, --dictionary\n\tPrint list defined symbols.")
             os.exit(0)
         elseif arg[i] == "-us" or arg[i] == "--usage" then 
-            print("Special tokens: \n . - line containing only a single dot signals end of expression.\nexpr,{{, ;; - place function as an argument for other function.\nend,}},; - end last opened function. \nFunctions:\nmatrix rows end -- generate matrices.\nMatrix types: matrix, (matrix, {matrix, [matrix, |matrix, ||matrix\namatrix matrix_type element number_a number_b end - generate matrices with element numeration\ncases lines end - generate cases\nsub token, substack lines end - adds sub-value to the token\npow, ^ - rises token to the power of value\nlog a b - generates log\nroot a b - generates root\nbinom a b, () a b - generates binomial\nlim expr - generates limit\nsum start upperbound, prod start upperbound - generates sum or product\n// a b endfractions, fraction a b endf, cfrac a b endf - generates continous fractions\ntxt tokens end ,text tokens end - generates plain text\nboxed tokens end - puts a box around text\nunderbrace token text end, overbrace token text end - puts underbrace/overbrace above/beneath token. Text as expr ... end")
+            print("Special tokens: \n . - line containing only a single dot signals end of expression.\n ## - signals a beginning, as well as end of a comment. \n expr,{{ - place function as an argument for other function.\n end,}} - end last opened function. \nFunctions:\nmatrix rows end -- generate matrices.\nMatrix types: matrix, (matrix, {matrix, [matrix, |matrix, ||matrix\namatrix matrix_type element number_a number_b end - generate matrices with element numeration\ncases lines end - generate cases\nsub token, substack lines end - adds sub-value to the token\npow, ^ - rises token to the power of value\nlog a b - generates log\nroot a b - generates root\nbinom a b, () a b - generates binomial\nlim a b - generates limit\nsum start upperbound, prod start upperbound - generates sum or product\n// a b endfractions, fraction a b endf, cfrac a b endf - generates continous fractions\ntxt tokens end ,text tokens end - generates plain text\nboxed tokens end - puts a box around text\nunderbrace token text end, overbrace token text end - puts underbrace/overbrace above/beneath token. Text as expr ... end")
             os.exit(0)
         elseif arg[i] == "-dy" or arg[i] == "--dictionary" then
             dictionary()
