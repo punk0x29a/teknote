@@ -5,20 +5,17 @@
 TekNote is a small Lua script designed to render taking quick notes in LaTeX easy and affordable.
 Its goal is help people with atrocious handwriting to have beautiful notes on their computers without being distracted.
 Taking notes in plain LaTeX is hard and demanding. TekNote language is, by comparison, very simple.
-It is great for taking notes on lectures, since there is a lot less rules to rememeber.
+It is great for taking notes on lectures, since there's a lot less rules to rememeber.
 Furthermore, it allows one to write very lazy code without worrying about its viability.
 
 TekNote language won't, of course, give one as much possibilities as plain LaTeX, and it is not designed to be this way. 
 For serious purposes, like writing a book or a scientific paper, one still needs to learn real LaTeX.
-TekNote gets really useful (and powerful) only when it comes to writing quick notes in a fast-paced evironment.
+TekNote gets really useful (and powerful) only when it comes to writing quick notes in a fast-paced environment.
 
 Script translates expression from TekNote micro-language into proper LaTeX code, ready to copy and paste into the renderer.
 Because of this nature it's perfectly sane to embed real LaTeX into TekNote's expression, which is extremely useful when one needs some of its rich features. 
 
 TekNote is designed to work with [ZIM](http://zim-wiki.org/) coupled with [Equation Editor Plugin](http://zim-wiki.org/manual/Plugins/Equation_Editor.html) and was thoroughly tested on it.
-
-Script is still a little buggy, especially when it comes to automatic newlines addition in regard to some functions.
-Altough it's nothing that couldn't be solved by double-tapping return key, it'll probably be looked into in the future.
 
 #### Usage:
 
@@ -46,7 +43,7 @@ Where `~/path/to/latexnote.lua` must be replaced with TekNote's real location.
 
 Such a function will 
 + Enter text editor, where one will edit temporary file
-+ Redirect resulting file as input for TekNote 
++ Redirect resulting file as an input for TekNote 
 + TekNote will then give back results ready for copy and paste into the renderer.
 
 #### Command Line Options:
@@ -67,7 +64,7 @@ There are three types of special tokens:
 
 `.` - Line containing only a sigle dot signals end of expression.
 
-This peculiar type of EOF sign has proven itself to be useful when one made a terrible mistake and wanted to translate only a part of an expression with a later part left for debugging later on. 
+This peculiar type of EOF sign has proven itself to be useful when one made a terrible mistake and wanted to translate only a part of an expression and left the rest for debugging later on. 
 
 Inserting line containing only `.` at the end of expression is mandatory. 
 
@@ -80,7 +77,7 @@ Both can be used interchangeably.
 Both can be used interchangeably.
 
 One does not need to end function scope if it's the last function in file. 
-Similarly - if there are many such functions at a very end of expression one does not need to end them at all. 
+Similarly - if there are many such opened functions at a very end of expression one does not need to end them at all. 
 
 #### Functions: 
 
