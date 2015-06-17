@@ -469,6 +469,9 @@ Symbols = {
 ["overline"] = "\\overline{",
 ["oline"] = "\\overline{",
 ["overl"] = "\\overline{",
+["uline"] = "\\underline{",
+["underl"] = "\\underline{",
+["underline"] = "\\underline{",
 ["lvl"] = " \\\\ ",
 ["product"] = "\\prod_{",
 ["tab"] = "\\qquad ",
@@ -537,7 +540,7 @@ function FunctionsCentral()
             underbrace()
         elseif parts[_] == "limits" or parts[_] == "intlimits" or parts[_] == "intl" or parts[_] == "ointl" or parts[_] == "ointlimits" or parts[_] == "sum" or parts[_] == "U+i" or parts[_] == "U.i" or parts[_] == "Uxi" or parts[_] == "U*i" or parts[_] == "Setai" or parts[_] == "Set*i" or parts[_] == "Ui" or parts[_] == "Setori" or parts[_] == "Set+i" or parts[_] == "prod" or parts[_] == "product" or parts[_] == "limits" then 
         sumsandlimits()
-        elseif parts[_] == "bar" or  parts[_] == "pow" or parts[_] == "^" or parts[_] == "overrightarrow" or parts[_] == "power" or parts[_] == "overline" or parts[_] == "overl" or parts[_] == "oline" or parts[_] == "vector" or parts[_] == "vec" or parts[_] == "bigvector" or parts[_] == "bvec" or parts[_] == "bvector" or parts[_] == "bigvec" or parts[_] == "sub" then
+        elseif parts[_] == "bar" or  parts[_] == "pow" or parts[_] == "^" or parts[_] == "overrightarrow" or parts[_] == "power" or parts[_] == "overline" or parts[_] == "overl" or parts[_] == "oline" or parts[_] == "uline" or parts[_] == "underl" or parts[_] == "underline" or parts[_] == "vector" or parts[_] == "vec" or parts[_] == "bigvector" or parts[_] == "bvec" or parts[_] == "bvector" or parts[_] == "bigvec" or parts[_] == "sub" then
             curlyBracedSymbol()
         elseif parts[_] == "txt" or parts[_] ==  "text" then 
             textrm()
