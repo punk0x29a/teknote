@@ -518,6 +518,7 @@ end
 
 
 --skip spaces until token is encountered, good when autospace is on
+--
 function skipSpaces()
     if spaces and parts[_] == ",," then 
         while _ <= #parts do 
