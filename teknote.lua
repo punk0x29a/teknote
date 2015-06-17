@@ -503,6 +503,7 @@ end
 
 
 --remove all preceding whitespaces, good when autospace is on
+--
 function checkForPrecedingSpace()
     if spaces or tabs then 
         local h = #Aparts
