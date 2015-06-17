@@ -530,6 +530,7 @@ function skipSpaces()
 end
 
 --this launches different functions, invoked by addSymbol
+--
 function FunctionsCentral()
     
         if parts[_] == "obrace" or parts[_] == "overb" or parts[_] == "overbrace" or parts[_] == "o{" then
