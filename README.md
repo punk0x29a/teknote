@@ -34,7 +34,7 @@ It's highly recommended to make separate function in, for example, ~/.bashrc :
 ```
 function teknote()
 {
-            vim ~/.math_expression && lua52 ~/path/to/latexnote.lua < ~/.math_expression
+            vim ~/.math_expression && lua52 ~/path/to/teknote.lua < ~/.math_expression
 }
 ```
 Where `~/path/to/latexnote.lua` must be replaced with TekNote's real location.

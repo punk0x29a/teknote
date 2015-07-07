@@ -453,6 +453,7 @@ Symbols = {
 ["sub"] = "_{",
 ["vec"] = "\\vec{",
 ["vector"] = "\\vec{",
+["hat"] = "\\hat{",
 ["bigvector"] = "\\overrightarrow{",
 ["overrightarrow"] = "\\overrightarrow{",
 ["bvector"] = "\\overrightarrow{",
@@ -543,7 +544,7 @@ function FunctionsCentral()
             underbrace()
         elseif parts[_] == "limits" or parts[_] == "intlimits" or parts[_] == "intl" or parts[_] == "ointl" or parts[_] == "ointlimits" or parts[_] == "sum" or parts[_] == "U+i" or parts[_] == "U.i" or parts[_] == "Uxi" or parts[_] == "U*i" or parts[_] == "Setai" or parts[_] == "Set*i" or parts[_] == "Ui" or parts[_] == "Setori" or parts[_] == "Set+i" or parts[_] == "prod" or parts[_] == "product" or parts[_] == "limits" then 
         sumsandlimits()
-        elseif parts[_] == "bar" or  parts[_] == "pow" or parts[_] == "^" or parts[_] == "overrightarrow" or parts[_] == "power" or parts[_] == "overline" or parts[_] == "overl" or parts[_] == "oline" or parts[_] == "uline" or parts[_] == "underl" or parts[_] == "underline" or parts[_] == "vector" or parts[_] == "vec" or parts[_] == "bigvector" or parts[_] == "bvec" or parts[_] == "bvector" or parts[_] == "bigvec" or parts[_] == "sub" then
+        elseif parts[_] == "bar" or parts[_] == "hat" or  parts[_] == "pow" or parts[_] == "^" or parts[_] == "overrightarrow" or parts[_] == "power" or parts[_] == "overline" or parts[_] == "overl" or parts[_] == "oline" or parts[_] == "uline" or parts[_] == "underl" or parts[_] == "underline" or parts[_] == "vector" or parts[_] == "vec" or parts[_] == "bigvector" or parts[_] == "bvec" or parts[_] == "bvector" or parts[_] == "bigvec" or parts[_] == "sub" then
             curlyBracedSymbol()
         elseif parts[_] == "txt" or parts[_] ==  "text" then 
             textrm()
@@ -1028,7 +1029,7 @@ while i <= #arg do
         elseif arg[i] == "--nonewlines" or arg[i] == "-nn" then
             newlines = false
         elseif arg[i] == "-h" or arg[i] == "--help" then 
-            print("-nn, --nonewlines\n\tDisable automatic adding of \\\\. Use \"lvl\", \"level\" or manually insert \\\\ instead.\n-nt, --notabs\n\t Disable automatic adding of \\qquad. Use \"tab\", or manually insert \\qquad instead.\n-ns, --nospaces\n\tDisable automatic adding of \\:, use \"[]\" \"txt\",\"text\" or manually insert \\: instead. \n-h, --help\n\tDisplay this help message. \n-us, --usage\n\tPrint usage guide.\n-dy, --dictionary\n\tPrint list defined symbols.")
+            print("-c, --color\n\tChoose color, followed by color name, for example \"white\"\n-nn, --nonewlines\n\tDisable automatic adding of \\\\. Use \"lvl\", \"level\" or manually insert \\\\ instead.\n-nt, --notabs\n\t Disable automatic adding of \\qquad. Use \"tab\", or manually insert \\qquad instead.\n-ns, --nospaces\n\tDisable automatic adding of \\:, use \"[]\" \"txt\",\"text\" or manually insert \\: instead. \n-h, --help\n\tDisplay this help message. \n-us, --usage\n\tPrint usage guide.\n-dy, --dictionary\n\tPrint list defined symbols.")
             os.exit(0)
         elseif arg[i] == "-us" or arg[i] == "--usage" then 
             print("Special tokens: \n . - line containing only a single dot signals end of expression.\n ## - signals a beginning, as well as end of a comment. \n expr,{{ - place function as an argument for other function.\n end,}} - end last opened function. \nFunctions:\nmatrix rows end -- generate matrices.\nMatrix types: matrix, (matrix, {matrix, [matrix, |matrix, ||matrix\namatrix matrix_type element number_a number_b end - generate matrices with element numeration\ncases lines end - generate cases\nsub token, substack lines end - adds sub-value to the token\npow, ^ - rises token to the power of value\nlog a b - generates log\nroot a b - generates root\nbinom a b, () a b - generates binomial\nlim a b - generates limit\nsum start upperbound, prod start upperbound - generates sum or product\n// a b endfractions, fraction a b endf, cfrac a b endf - generates continous fractions\ntxt tokens end ,text tokens end - generates plain text\nboxed tokens end - puts a box around text\nunderbrace token text end, overbrace token text end - puts underbrace/overbrace above/beneath token. Text as expr ... end")
