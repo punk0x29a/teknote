@@ -1,5 +1,4 @@
-
-function isMember(table, key) return table[key]  ~= nil end
+function isMember(key, someTable) return someTable[key]  ~= nil end
 
 --[[
 --  teknote.lua
@@ -33,6 +32,7 @@ Symbols = {
 ["setor"] = "\\cup ",
 ["sor"] = "\\cup ", 
 ["set+"] = "\\cup ", 
+["set"] = "",
 ["u+"] = "\\uplus ",
 ["uplus"] = "\\uplus",
 ["sqcap"] = "\\sqcap ",
@@ -88,7 +88,6 @@ Symbols = {
 ["setminus"] = "\\setminus ",
 ["ip"] = "\\amalg ",
 ["amalg"] = "\\amalg ",
-["##"] = " ",
     --Logic 
 ["ex"] = "\\exists ",
 ["nex"] = "\\nexist ",
@@ -320,7 +319,6 @@ Symbols = {
     --OtherSymbols 
 ["partial"] = "\\partial ",
 ["eth"] = "\\eth ",
-["hbar"] = "\\hbar ",
 ["imath"] = "\\imath ",
 ["jmath"] = "\\jmath ",
 ["ell"] = "\\ell ",
@@ -336,7 +334,6 @@ Symbols = {
 ["infty"] = "\\infty ",
 ["-oo"] = "-\\infty",
 ["-infty"] = "-\\infty",
-["bar"] = "\\bar{",
 [",,"] = "\\: ",
 ["[]"] = " ", 
 ["aleph"] = "\\aleph ",
@@ -351,17 +348,11 @@ Symbols = {
 ["ddots"] = "\\ddots ", 
 ["d..."] = "\\ddots ",
 ["ln"] = "\\ln ",
-["log"] = "\\log_{",
 ["max"] = "\\max",
 ["min"] = "\\min",
 ["sup"] = "\\sup",
-["liminf"] = "\\liminf_{",
-["limsup"] = "\\limsup_{",
 ["inf"] = "\\inf ",
 ["ker"] = "\\ker ",
-["lim"] = "\\lim_{",
-["limit"] = "\\lim_{",
-["limes"] = "\\lim_{",
     --BigCommands
 ["int"] = "\\int ",
 ["iint"] = "\\iint",
@@ -369,58 +360,34 @@ Symbols = {
 ["iiiint"] = "\\iiiint",
 ["int...int"] = "\\idotsint ", 
 ["integral"] = "\\int ",
-["intlimits"] = "\\int\\limits_{",
-["intl"] = "\\int\\limits_{",
 ["oint"] = "\\oint ",
-["ointl"] = "\\oint\\limits_{",
-["ointlimits"] = "\\oint\\limits_{",
-["substack"] = "_{\\substack{",
 ["level"] = " \\\\ ",
 ["wlevel"] = " \\\\ \\color{white}",
 ["wlvl"] = " \\\\ \\color{white}",
 ["endsubstack"] = "}} ",
 ["sum"] = "\\sum ",
-["limits"] = "\\limits_{",
-["O+i"] = "\\bigoplus_{ ",
 ["O+"] = "\\bigoplus ",
 ["bigoplus"] = "\\bigoplus ",
-["O.i"] = "\\bigodot_{ ",
 ["O."] = "\\bigodot ",
 ["bigodot"] = "\\bigodot ",
 ["Ox"] = "\\bigotimes ",
-["Oxi"] = "\\bigotimes_{ ",
 ["bigotimes"] = "\\bigotimes ",
 ["O*"] = "\\bigotimes ",
-["O*i"] = "\\bigotimes_{ ",
 ["bigcup"] = "\\bigcup ",
 ["bigsor"] = "\\bigcup ",
 ["bigsetor"] = "\\bigcup ",
-["Ui"] = "\\bigcup_{ ",
-["Setori"] = "\\bigcup_{",
-["Set+i"] = "\\bigcup_{",
 ["U"] = "\\bigcup ",
 ["Setor"] = "\\bigcup ",
 ["Set+"] = "\\bigcup ",
 ["Seta"] = "\\bigcap",
-["Setai"] = "\\bigcap_{",
 ["Set*"]= "\\bigcap",
-["Set*i"]= "\\bigcap_{",
 ["bigsqcup"] = "\\bigsqcup ",
 ["big[setor"] = "\\bigsqcup ", 
 ["big[sor"] = "\\bigsqcup ", 
-["prod"] = "\\prod_{",
 ["coprod"] = "\\coprod ",
 ["bigwedge"] = "\\bigwedge ",
-["root"] = "\\sqrt[",
-["sqrt"] = "\\sqrt[",
-["fraction"] = "\\cfrac{",
-["//"] = "\\cfrac{",
-["cfrac"] = "\\cfrac{",
 ["endf"] = "",
 ["endfractions"] = "",
-["sum"] = "\\sum_{",
-["expr"] = "",
-["{{"] = "",
 ["}}"] = "",
 ["textrm"] = "\\textrm{",
 ["exp"] = "\\exp",
@@ -428,11 +395,67 @@ Symbols = {
 [")"] = "}}",
 ["{"] = "\\{",
 ["}"] = "\\}",
-["()"] = "\\binom{ ",
-["binom"] =" \\binom{ ",
 ["over"] = "\\over ",
 ["/"] = "}\\over{",
+["endtabular"] = "\\end{array} ", 
+["hline"] = " \\\\ \\hline ", 
+["hbar"] = "\\hbar ",
+["matrix_separator"] = " & ",
+["endmatrix"] = "\\end{matrix}",
+["end(matrix"] = "\\end{pmatrix}",
+["end[matrix"] = "\\end{bmatrix}",
+["end{matrix"] = "\\end{Bmatrix}",
+["end|matrix"] = "\\end{vmatrix}",
+["end||matrix"] = "\\end{Vmatrix}",
+["lvl"] = " \\\\ ",
+["tab"] = "\\qquad ",
+["qquad"] = "\\qquad ",
+["arg"] = "\\arg",
+["set"] = "\\{", 
+[";"] = "; ", 
+[";;"] = "",
+["##"] = " ",
+["txt"] = "",
+["text"] = "", 
+["boxed"] = "\\boxed{",
+["substack"] = "_{\\substack{",
+["root"] = "\\sqrt[",
+["sqrt"] = "\\sqrt[",
+["fraction"] = "\\cfrac{",
+["//"] = "\\cfrac{",
+["cfrac"] = "\\cfrac{",
 ["amatrix"] = " ",
+["tabular"] = "\\begin{array}{ ",
+["cases"] = "\\begin{cases} ",
+["expr"] = "",
+["{{"] = "",
+["obrace"] = "\\overbrace{",
+["overb"] = "\\overbrace{",
+["overbrace"] = "\\overbrace{",
+["o{"] = "\\overbrace{",
+["ubrace"] = "\\underbrace{",
+["underb"] = "\\underbrace{",
+["underbrace"] = "\\underbrace{",
+["u{"] = "\\underbrace{",
+["hat"] = "\\hat{",
+["overline"] = "\\overline{",
+["vec"] = "\\vec{",
+["vector"] = "\\vec{",
+["bar"] = "\\bar{",
+["bigvector"] = "\\overrightarrow{",
+["overrightarrow"] = "\\overrightarrow{",
+["bvector"] = "\\overrightarrow{",
+["bigvec"] = "\\overrightarrow{",
+["bvec"] = "\\overrightarrow{",
+["oline"] = "\\overline{",
+["overl"] = "\\overline{",
+["uline"] = "\\underline{",
+["underl"] = "\\underline{",
+["underline"] = "\\underline{",
+["pow"] = "^{",
+["^"] = "^{",
+["power"] = "^{",
+["sub"] = "_{",
 ["matrix"] = "\\begin{matrix} ",
 ["(matrix"] = "\\begin{pmatrix} ",
 ["pmatrix"] = "\\begin{pmatrix} ",
@@ -444,54 +467,148 @@ Symbols = {
 ["vmatrix"] = "\\begin{vmatrix} ",
 ["||matrix"] = "\\begin{Vmatrix} ",
 ["Vmatrix"] = "\\begin{Vmatrix} ",
+["intlimits"] = "\\int\\limits_{",
+["intl"] = "\\int\\limits_{",
+["ointl"] = "\\oint\\limits_{",
+["ointlimits"] = "\\oint\\limits_{",
+["sum"] = "\\sum_{",
+["O+i"] = "\\bigoplus_{ ",
+["product"] = "\\prod_{",
+["prod"] = "\\prod_{",
+["Ui"] = "\\bigcup_{ ",
+["Setori"] = "\\bigcup_{",
+["Set+i"] = "\\bigcup_{",
+["Setai"] = "\\bigcap_{",
+["Set*i"]= "\\bigcap_{",
+["limits"] = "\\limits_{",
+["O.i"] = "\\bigodot_{ ",
+["O*i"] = "\\bigotimes_{ ",
+["Oxi"] = "\\bigotimes_{ ",
+["limit"] = "\\lim_{",
+["lim"] = "\\lim_{",
+["limes"] = "\\lim_{",
+["liminf"] = "\\liminf_{",
+["limsup"] = "\\limsup_{",
+["log"] = "\\log_{",
+["()"] = "\\binom{ ",
+["binom"] =" \\binom{ ",
+}
+
+dots = {
+["..."] = "\\cdots ",
+["cdots"] = "\\cdots ",
+["dots"] = "\\dots ", 
+["v..."] = "\\vdots ",
+["vdots"] = "\\vdots ", 
+["ddots"] = "\\ddots ", 
+["d..."] = "\\ddots ",
+}
+
+miscAliases = {
+["set"] = "\\{", 
+[";"] = "; ", 
+[";;"] = "",
+["##"] = " ",
+["txt"] = "",
+["text"] = "", 
+["boxed"] = "\\boxed{",
+["substack"] = "_{\\substack{",
+["root"] = "\\sqrt[",
+["sqrt"] = "\\sqrt[",
+["fraction"] = "\\cfrac{",
+["//"] = "\\cfrac{",
+["cfrac"] = "\\cfrac{",
+["amatrix"] = " ",
 ["tabular"] = "\\begin{array}{ ",
-["endtabular"] = "\\end{array} ", 
-["hline"] = " \\\\ \\hline ", 
-["pow"] = "^{",
-["^"] = "^{",
-["power"] = "^{",
-["sub"] = "_{",
+["cases"] = "\\begin{cases} ",
+["expr"] = "",
+["{{"] = "",
+["level"] = " \\\\ ",
+}
+
+overbraceAliases = {
+["obrace"] = "\\overbrace{",
+["overb"] = "\\overbrace{",
+["overbrace"] = "\\overbrace{",
+["o{"] = "\\overbrace{",
+}
+
+underbraceAliases = {
+["ubrace"] = "\\underbrace{",
+["underb"] = "\\underbrace{",
+["underbrace"] = "\\underbrace{",
+["u{"] = "\\underbrace{",
+}
+
+decoratorAliases = { 
+["hat"] = "\\hat{",
+["overline"] = "\\overline{",
 ["vec"] = "\\vec{",
 ["vector"] = "\\vec{",
-["hat"] = "\\hat{",
+["bar"] = "\\bar{",
 ["bigvector"] = "\\overrightarrow{",
 ["overrightarrow"] = "\\overrightarrow{",
 ["bvector"] = "\\overrightarrow{",
 ["bigvec"] = "\\overrightarrow{",
 ["bvec"] = "\\overrightarrow{",
-["matrix_separator"] = " & ",
-["endmatrix"] = "\\end{matrix}",
-["end(matrix"] = "\\end{pmatrix}",
-["end[matrix"] = "\\end{bmatrix}",
-["end{matrix"] = "\\end{Bmatrix}",
-["end|matrix"] = "\\end{vmatrix}",
-["end||matrix"] = "\\end{Vmatrix}",
-["cases"] = "\\begin{cases} ",
-["overline"] = "\\overline{",
 ["oline"] = "\\overline{",
 ["overl"] = "\\overline{",
 ["uline"] = "\\underline{",
 ["underl"] = "\\underline{",
 ["underline"] = "\\underline{",
-["lvl"] = " \\\\ ",
+["pow"] = "^{",
+["^"] = "^{",
+["power"] = "^{",
+["sub"] = "_{",
+}
+
+matrixAliases = {
+["matrix"] = "\\begin{matrix} ",
+["(matrix"] = "\\begin{pmatrix} ",
+["pmatrix"] = "\\begin{pmatrix} ",
+["[matrix"] = "\\begin{bmatrix} ",
+["bmatrix"] = "\\begin{bmatrix} ",
+["{matrix"] = "\\begin{Bmatrix} ",
+["Bmatrix"] = "\\begin{Bmatrix} ", 
+["|matrix"] = "\\begin{vmatrix} ",
+["vmatrix"] = "\\begin{vmatrix} ",
+["||matrix"] = "\\begin{Vmatrix} ",
+["Vmatrix"] = "\\begin{Vmatrix} ",
+}
+    
+
+sigmaAliases = { 
+["intlimits"] = "\\int\\limits_{",
+["intl"] = "\\int\\limits_{",
+["ointl"] = "\\oint\\limits_{",
+["ointlimits"] = "\\oint\\limits_{",
+["sum"] = "\\sum_{",
+["O+i"] = "\\bigoplus_{ ",
 ["product"] = "\\prod_{",
-["tab"] = "\\qquad ",
-["qquad"] = "\\qquad ",
-["obrace"] = "\\overbrace{",
-["overb"] = "\\overbrace{",
-["overbrace"] = "\\overbrace{",
-["o{"] = "\\overbrace{",
-["ubrace"] = "\\underbrace{",
-["underb"] = "\\underbrace{",
-["underbrace"] = "\\underbrace{",
-["u{"] = "\\underbrace{",
-["boxed"] = "\\boxed{",
-["arg"] = "\\arg",
-["set"] = "\\{", 
-["txt"] = "",
-["text"] = "", 
-[";"] = "; ", 
-[";;"] = "",
+["prod"] = "\\prod_{",
+["Ui"] = "\\bigcup_{ ",
+["Setori"] = "\\bigcup_{",
+["Set+i"] = "\\bigcup_{",
+["Setai"] = "\\bigcap_{",
+["Set*i"]= "\\bigcap_{",
+["limits"] = "\\limits_{",
+["O.i"] = "\\bigodot_{ ",
+["O*i"] = "\\bigotimes_{ ",
+["Oxi"] = "\\bigotimes_{ ",
+}
+
+limitAliases = {
+["limit"] = "\\lim_{",
+["lim"] = "\\lim_{",
+["limes"] = "\\lim_{",
+}
+
+coefAliases = {
+["liminf"] = "\\liminf_{",
+["limsup"] = "\\limsup_{",
+["log"] = "\\log_{",
+["()"] = "\\binom{ ",
+["binom"] =" \\binom{ ",
 }
 
 --FUNCTIONS: 
@@ -507,10 +624,10 @@ end
 --
 function checkForPrecedingSpace()
     if spaces or tabs then 
-        local h = #Aparts
-        if Aparts[h] == "\\: " or Aparts[h] == "\\qquad " then 
-            while Aparts[h] == "\\: " or Aparts[h] == "\\qquad " do
-            Aparts[h] = ""
+        local h = #result
+        if result[h] == "\\: " or result[h] == "\\qquad " then 
+            while result[h] == "\\: " or result[h] == "\\qquad " do
+            result[h] = ""
             h = h - 1 
             end
         end
@@ -519,114 +636,128 @@ end
 
 
 
+function nextToken()
+    _ = _ + 1 
+    currentToken = tokens[_]
+end
+
+function isFunction(command)
+    return isMember(command,miscAliases) or isMember(comment,coefAliases) or isMember(command,limitAliases) or isMember(command,decoratorAliases) or isMember(command,matrixAliases) or isMember(command,underbraceAliases) or isMember(command,overbraceAliases)
+end
+
+
 --skip spaces until token is encountered, good when autospace is on
 --
 function skipSpaces()
-    if spaces and parts[_] == ",," then 
-        while _ <= #parts do 
-            _ = _ + 1 
-            if parts[_] ~= ",," then
+    if spaces and currentToken == ",," then 
+        while _ <= #tokens do 
+            nextToken() 
+            if currentToken ~= ",," then
                 break
             end
         end
     end
 end
 
+function isEndSign(offset)
+    return tokens[_+offset] == "end" or tokens[_+offset] == "}}"
+end
+
+function isNewLevel(offset)
+    return tokens[_+offset] == "level" or tokens[_+offset] == "lvl" or tokens[_+offset] == "\\\\"
+end
+
 --this launches different functions, invoked by addSymbol
 --
 function FunctionsCentral()
-    
-        if parts[_] == "obrace" or parts[_] == "overb" or parts[_] == "overbrace" or parts[_] == "o{" then
+        if isMember(currentToken,overbraceAliases) then
             overbrace()
-        elseif parts[_] == "##" then
-            comment()
-        elseif parts[_] == "ubrace" or parts[_] == "underb" or parts[_] == "underbrace" or parts[_] == "u{" then
+        elseif isMember(currentToken,underbraceAliases) then
             underbrace()
-        elseif parts[_] == "limits" or parts[_] == "intlimits" or parts[_] == "intl" or parts[_] == "ointl" or parts[_] == "ointlimits" or parts[_] == "sum" or parts[_] == "U+i" or parts[_] == "U.i" or parts[_] == "Uxi" or parts[_] == "U*i" or parts[_] == "Setai" or parts[_] == "Set*i" or parts[_] == "Ui" or parts[_] == "Setori" or parts[_] == "Set+i" or parts[_] == "prod" or parts[_] == "product" or parts[_] == "limits" then 
-        sumsandlimits()
-        elseif parts[_] == "bar" or parts[_] == "hat" or  parts[_] == "pow" or parts[_] == "^" or parts[_] == "overrightarrow" or parts[_] == "power" or parts[_] == "overline" or parts[_] == "overl" or parts[_] == "oline" or parts[_] == "uline" or parts[_] == "underl" or parts[_] == "underline" or parts[_] == "vector" or parts[_] == "vec" or parts[_] == "bigvector" or parts[_] == "bvec" or parts[_] == "bvector" or parts[_] == "bigvec" or parts[_] == "sub" then
-            curlyBracedSymbol()
-        elseif parts[_] == "txt" or parts[_] ==  "text" then 
-            textrm()
-        elseif parts[_] == "boxed" then
-            boxed()
-        elseif parts[_] == "substack" then 
-            substack()
-        elseif parts[_] == "root" then 
-            root()
-        elseif parts[_] == "sqrt" then
-            sqrt()
-        elseif parts[_] == "amatrix" then
-            amatrix()
-        elseif parts[_] == "tabular" then
-            tabular()
-        elseif parts[_] == "set" then 
-            set()
-        elseif parts[_] == "matrix" or parts[_] == "|matrix" or parts[_] == "(matrix" or  parts[_] == "pmatrix" or parts[_] == "bmatrix" or parts[_] == "Bmatrix" or parts[_] == "vmatrix" or parts[_] == "Vmatrix" or parts[_] == "{matrix" or parts[_] == "[matrix" or parts[_] == "||matrix" then 
+        elseif isMember(currentToken,sigmaAliases) then 
+            sigmaNotation()
+        elseif isMember(currentToken,decoratorAliases) then
+            decorate()
+        elseif isMember(currentToken,matrixAliases) then 
             matrix()
-        elseif parts[_] == "cases" then 
-            cases()
-        elseif parts[_] == "//" or parts[_] == "fraction" or parts[_] ==  "cfrac" then 
-            fraction()
-        elseif parts[_] == "endf" or parts[_] == "endfractions" then
-            endfractions()
-        elseif parts[_] == "lim" then
+        elseif isMember(currentToken,limitAliases) then
             limit()
-        elseif parts[_] == "log" or parts[_] == "limes" or parts[_] == "limit" or parts[_] == "limsup" or parts[_] == "liminf" or parts[_] == "binom" or parts[_] == "()" then 
-            doublyCurlyBracedSymbol() 
-        elseif parts[_] == "end" then 
-        elseif parts[_] == "expr" or parts[_] == "{{" or parts[_] == ";;" then
+        elseif isMember(currentToken, coefAliases) then 
+            coefSymbol() 
+        elseif currentToken == "txt" or currentToken ==  "text" then 
+            textrm()
+        elseif currentToken == "boxed" then
+            boxed()
+        elseif currentToken == "substack" then 
+            substack()
+        elseif currentToken == "root" then 
+            root()
+        elseif currentToken == "sqrt" then
+            sqrt()
+        elseif currentToken == "amatrix" then
+            amatrix()
+        elseif currentToken == "tabular" then
+            tabular()
+        elseif currentToken == "set" then 
+            set()
+        elseif currentToken == "cases" then 
+            cases()
+        elseif currentToken == "//" or currentToken == "fraction" or currentToken ==  "cfrac" then 
+            fraction()
+        elseif currentToken == "endf" or currentToken == "endfractions" then
+            endfractions()
+        elseif currentToken == "expr" or currentToken == "{{" then
             expr()
-        elseif parts[_] == "level" or parts[_] == "lvl" then 
+        elseif currentToken == "level" or currentToken == "lvl" then 
             level()
+        elseif currentToken == "##" then
+            comment()
         else 
-            table.insert(Aparts, Symbols[parts[_]])
+            table.insert(result, Symbols[currentToken])
         end 
 end
 
+function twoMajorLetters()
+     return string.len(currentToken) == 2 and string.find(currentToken:sub(1,1), "%u") and currentToken:sub(1,1) == currentToken:sub(2,2)  
+end
 
 function addSymbol()
-    if isMember(Symbols,parts[_]) then
+    if isFunction(currentToken) then
         FunctionsCentral()
-    else
-        if parts[_] ~= nil then 
-            if string.len(parts[_]) == 2 then
-                if string.find(parts[_]:sub(1,1), "%u") and parts[_]:sub(1,1) == parts[_]:sub(2,2) then
-
-                     mathbb()
-             else
-                    table.insert(Aparts, parts[_])
-                 end
-             else
-                    table.insert(Aparts, parts[_])
-            end
+    elseif isMember(currentToken,Symbols) then 
+        table.insert(result, Symbols[currentToken])
+    elseif currentToken ~= nil then 
+        if twoMajorLetters() then
+             mathbb()
+        else
+            table.insert(result, currentToken)
         end
     end
 end
 
 --put a box around text
 function boxed()
-    table.insert(Aparts, Symbols[parts[_]])
-    while _ <= #parts do 
-        _ = _ + 1 
-        if parts[_] == "end" or parts[_] == "level" or parts[_] == ";" then
+    table.insert(result, Symbols[currentToken])
+    while _ <= #tokens do 
+        nextToken() 
+        if isEndSign(0) or isNewLevel(0) then
              break
         else
             skipSpaces()
             addSymbol()
         end
     end
-    table.insert(Aparts, "}")
+    table.insert(result, "}")
 end
 
 --this wraps tokens between { and } inserting , in between
 function set()
     waslevel = 0;
-    table.insert(Aparts, Symbols[parts[_]])
-    while _ <= #parts do
-        _ = _ + 1
-        if parts[_] == "end" or parts[_] == "level" or parts[_] == "}}" then 
-            if parts[_] == "level" then
+    table.insert(result, Symbols[currentToken])
+    while _ <= #tokens do
+        nextToken()
+        if isEndSign(0) or isNewLevel(0) then 
+            if currentToken == "level" then
                 waslevel=1;
                 break;
             else
@@ -635,93 +766,77 @@ function set()
         else 
             skipSpaces()
             addSymbol()
-            if _+2 <= #parts then
+            if _+2 <= #tokens then
                 skipSpaces()
-                if parts[_+2] == "end" or parts[_+2] == "level" or parts[_+2] == "}}" then 
-                    _ = _ + 1
+                if isEndSign(2) or isNewLevel(2) then 
+                    nextToken()
                 else
-                    table.insert(Aparts, ",")
-                    _ = _ + 1
+                    table.insert(result, ",")
+                    nextToken()
                 end
             end
         end
     end
-            table.insert(Aparts, "\\}")
+    table.insert(result, "\\}")
     if waslevel == 1 then
-                table.insert(Aparts, Symbols["level"]);
-            end
+                table.insert(result, Symbols["level"]);
+    end
 end
 
 --overbrace/underbrace tokens and put text above it : overbrace {{ expression }} {{ text }}
 function overbrace()
     checkForPrecedingSpace()
-    table.insert(Aparts, Symbols[parts[_]])
-    _ = _ + 1 
-    skipSpaces()
-    addSymbol()
-    table.insert(Aparts, "}^{")
-    _ = _ + 1 
-    skipSpaces()
-    addSymbol()
-    table.insert(Aparts, "}")
+    insertThree(Symbols[currentToken],"}^{","}")
 end 
 
 function underbrace()
     checkForPrecedingSpace()
-    table.insert(Aparts, Symbols[parts[_]])
-    _ = _ + 1
-    skipSpaces()
-    addSymbol()
-    table.insert(Aparts, "}_{")
-    _ = _ + 1 
-    skipSpaces()
-    addSymbol()
-    table.insert(Aparts, "}")
+    insertThree(Symbols[currentToken],"}^{","}")
 end 
 
 --insert newline, useful when autonewline is off 
 function level() 
     if color then 
-        table.insert(Aparts, " \\\\ " .. color .. " ")
+        table.insert(result, " \\\\ " .. color .. " ")
     else
-        table.insert(Aparts, " \\\\ ")
+        table.insert(result, " \\\\ ")
     end
 end
 
 
 --determine matrix type 
-function setmswitch()
-            if parts[_] == "(matrix" or parts[_] == "pmatrix" then 
-                mswitcher = 1
-            elseif parts[_] == "[matrix" or parts[_] == "bmatrix" then 
-                mswitcher = 2
-            elseif parts[_] == "{matrix" or parts[_] == "Bmatrix" then 
-                mswitcher = 3 
-            elseif parts[_] == "|matrix" or parts[_] == "vmatrix" then 
-                mswitcher = 4
-            elseif parts[_] == "||matrix" or parts[_] == "Vmatrix" then 
-                mswitcher = 5 
+function setMatrixEndSign()
+            if currentToken == "(matrix" or currentToken == "pmatrix" then 
+                matrixEndSign = "end(matrix"
+            elseif currentToken == "[matrix" or currentToken == "bmatrix" then 
+                matrixEndSign = "end[matrix"
+            elseif currentToken == "{matrix" or currentToken == "Bmatrix" then 
+                matrixEndSign = "end{matrix"
+            elseif currentToken == "|matrix" or currentToken == "vmatrix" then 
+                matrixEndSign = "end|matrix"
+            elseif currentToken == "||matrix" or currentToken == "Vmatrix" then 
+                matrixEndSign = "end||matrix"
             else 
-                mswitcher = 0 
+                matrixEndSign = "endmatrix" 
             end 
 end
 
 --generate matrix from tokens 
 function matrix()
-            setmswitch() 
-            table.insert(Aparts, Symbols[parts[_]])
-            while _ <= #parts do 
-                _ = _ + 1
-                if parts[_] == ";" or parts[_] == "end" or _ == #parts then
+            setMatrixEndSign() 
+            table.insert(result, Symbols[currentToken])
+            while _ <= #tokens do 
+                nextToken()
+                if isEndSign(0) or _ == #tokens then
                     break
                 end
-                if parts[_] == "level" or parts[_] == "lvl" or parts[_] == "\\\\" then
-                    table.insert(Aparts, Symbols["level"])
-                elseif parts[_] ~= ",," then
+                if isNewLevel(0) then
+                    table.insert(result, Symbols["level"])
+                elseif currentToken ~= ",," then
                     addSymbol()
-                    if _+1 <= #parts then
-                        if parts[_+1] ~= "level" and parts[_+1] ~= "lvl" and parts[_+1] ~= "\\\\" and parts[_+1] ~= "end" and parts[_+1] ~= ";" then 
-                            table.insert(Aparts, Symbols["matrix_separator"])
+                    if _+1 <= #tokens then
+                        if not isNewLevel(1) and not isEndSign(1) then 
+                            table.insert(result, Symbols["matrix_separator"])
                         end
                     end
                 end
@@ -731,43 +846,35 @@ end
 
 --generate matrix with element numeration
 function amatrix()
-            _ = _ + 1
+            nextToken()
             skipSpaces()
-            setmswitch()
-            table.insert(Aparts, Symbols[parts[_]])
-            while _ <= #parts do 
-            _ = _ + 1 
+            setMatrixEndSign()
+            table.insert(result, Symbols[currentToken])
+            while _ <= #tokens do 
+            nextToken() 
             skipSpaces()
-                if parts[_] == "end" or parts[_] == ";" or _ == #parts then
+                if isEndSign(0) or _ == #tokens then
                     break
-                elseif parts[_] == "level" or parts[_] == "lvl" or parts[_] == "\\\\" then
-                    table.insert(Aparts, Symbols["level"])
-                elseif parts[_] == "..." or parts[_] == "dots" or parts[_] == "cdots" or parts[_] == "ddots" or parts[_] == "vdots" or parts[_] == "v..." or parts[_] == "d..." then 
-                    table.insert(Aparts, Symbols[parts[_]] )
-                    if _+1 <= #parts then
-                        if parts[_+1] ~= "level" and parts[_+1] ~= "lvl" and parts[_+1] ~= "\\\\" and parts[_+1] ~= "end" and parts[_+1] ~= ";" then 
-                            table.insert(Aparts, Symbols["matrix_separator"])
+                elseif isNewLevel(0) then
+                    table.insert(result, Symbols["level"])
+                elseif isMember(currentToken,dots) then 
+                    table.insert(result, Symbols[currentToken] )
+                    if _+1 <= #tokens then
+                        if not isNewLevel(1) and not isEndSign(1) then 
+                            table.insert(result, Symbols["matrix_separator"])
                         end
                     end
                 else 
-                    skipSpaces()
-                        addSymbol()
+                skipSpaces()
+                addSymbol()
                 checkForPrecedingSpace()
-                        table.insert(Aparts, "_{")
-                        _ = _ + 1 
-                    skipSpaces()
-                        addSymbol()
-                        table.insert(Aparts, ",")
-                        _ = _ + 1
-                    skipSpaces()
-                        addSymbol()
-                        table.insert(Aparts, "}")
-                        if _+1 <= #parts then
-                            if parts[_+1] ~= "level" and parts[_] ~= "lvl" and parts[_] ~= "\\\\" then 
-                    skipSpaces()
-                                table.insert(Aparts, Symbols["matrix_separator"])
-                            end
+                insertThree("_{",",","}")
+                if _+1 <= #tokens then
+                        if not isNewLevel(1) then 
+                            skipSpaces()
+                            table.insert(result, Symbols["matrix_separator"])
                         end
+                    end
                 end
             end 
             closematrix()
@@ -775,36 +882,24 @@ end
 
 --end matrices accordingly to they type  
 function closematrix()
-            if mswitcher == 1 then 
-                table.insert(Aparts, Symbols["end(matrix"])
-            elseif mswitcher == 2 then 
-                table.insert(Aparts, Symbols["end[matrix"])
-            elseif mswitcher == 3 then 
-                table.insert(Aparts, Symbols["end{matrix"])
-            elseif mswitcher == 4 then
-                table.insert(Aparts, Symbols["end|matrix"])
-            elseif mswitcher == 5 then 
-                table.insert(Aparts, Symbols["end||matrix"])
-            else 
-                table.insert(Aparts, Symbols["endmatrix"])
-            end 
+        table.insert(result,Symbols[matrixEndSign])
 end
 
 
 --generate tabular [needs overhaul]
 function tabular()
-    table.insert(Aparts, Symbols[parts[_]])
+    table.insert(result, Symbols[currentToken])
     skipSpaces()
     columns = 0 
     iterator = _ 
-    while Symbols[parts[iterator]] ~= Symbols["level"] do 
-        if parts[iterator] == "{{" or parts[iterator] == ";" or parts[iterator] == "expr" then
-            while parts[iterator] ~= ";" and parts[iterator] ~= "end" and parts[iterator] ~= "}}" do 
+    while Symbols[tokens[iterator]] ~= Symbols["level"] do 
+        if tokens[iterator] == "{{" or tokens[iterator] == "expr" then
+            while tokens[iterator] ~= "end" and tokens[iterator] ~= "}}" do 
                 iterator = iterator + 1 
             end
             columns = columns + 1 
             iterator = iterator + 1 
-        elseif spaces == true and parts[iterator] == ",," then 
+        elseif spaces == true and tokens[iterator] == ",," then 
             iterator = iterator + 1 
         else
             columns = columns + 1 
@@ -812,32 +907,32 @@ function tabular()
         end
     end
     for i=2, columns do
-        Aparts[#Aparts] = Aparts[#Aparts] .. "c|"
+        result[#result] = result[#result] .. "c|"
     end
-        Aparts[#Aparts] = Aparts[#Aparts] .. "c} " 
-    while _ <= #parts do
-        _ = _ + 1
-        if parts[_] == ";" or parts[_] == "end" or parts[_] == "endtabular" then
+        result[#result] = result[#result] .. "c} " 
+    while _ <= #tokens do
+        nextToken()
+        if isEndSign(0) or currentToken == "endtabular" then
             break
         end
-        if parts[_] == "level" or parts[_] == "lvl" or parts[_] == "\\\\" then 
-            table.insert(Aparts, Symbols["hline"] )
-        elseif parts[_] ~= ",," then
+        if isNewLevel(0) then 
+            table.insert(result, Symbols["hline"] )
+        elseif currentToken ~= ",," then
             addSymbol()
-                if _+1 <= #parts then
-                            if parts[_+1] ~= "level" and parts[_+1] ~= "lvl" and parts[_+1] ~= "\\\\" and parts[_+1] ~= "end" and parts[_+1] ~= ";" then 
-                                 table.insert(Aparts, Symbols["matrix_separator"])
-                            end
-                end
+            if _+1 <= #tokens then
+                        if not isNewLevel(1) and not isEndSign(1) then 
+                             table.insert(result, Symbols["matrix_separator"])
+                        end
+            end
         end
     end
-    table.insert(Aparts, Symbols["endtabular"])
+    table.insert(result, Symbols["endtabular"])
 end
 
 function expr()
-                while _ <= #parts do 
-                    _ = _ + 1 
-                    if parts[_] == "end" or parts[_] == "}}" or parts[_] == ";" then
+                while _ <= #tokens do 
+                    nextToken() 
+                    if isEndSign(0) then
                         break
                     else
                         addSymbol()
@@ -846,104 +941,101 @@ function expr()
 end 
 
 function textrm()
-                    table.insert(Aparts,Symbols["textrm"])
-                    while _ <= #parts do 
-                        _ = _ + 1 
-                        if parts[_] == "<" then
-                            table.insert(Aparts, "\\textless ")
-                        elseif parts[_] == ">" then 
-                            table.insert(Aparts, "\\textgreater ") 
-                        elseif parts[_] == "|" then 
-                            table.insert(Aparts, "\\textbar ")
-                        elseif parts[_] == "end" or parts[_] == "level" then
+                    table.insert(result,Symbols["textrm"])
+                    while _ <= #tokens do 
+                        nextToken() 
+                        if currentToken == "<" then
+                            table.insert(result, "\\textless ")
+                        elseif currentToken == ">" then 
+                            table.insert(result, "\\textgreater ") 
+                        elseif currentToken == "|" then 
+                            table.insert(result, "\\textbar ")
+                        elseif isEndSign(0) or isNewLevel(0) then
                             break
                         else
                                 addSymbol()
-                                table.insert(Aparts, " ")
+                                table.insert(result, " ")
                         end
                     end 
-                    table.insert(Aparts, "}")
+                    table.insert(result, "}")
 end
 
 function cases()
-            table.insert(Aparts, Symbols[parts[_]])
-            while _ <= #parts do 
-                _ = _ + 1 
-                if parts[_] == "end" or parts[_] == ";" then 
+            table.insert(result, Symbols[currentToken])
+            while _ <= #tokens do 
+                nextToken() 
+                if isEndSign(0) then 
                         break
-                elseif parts[_] == "level" or parts[_] == "lvl" or parts[_] == "\\\\" then
-                    table.insert(Aparts, Symbols["level"])
-                elseif parts[_] == "expr" or parts[_] == "{{" or parts[_] == ";;" then 
+                elseif isNewLevel(0) then
+                    table.insert(result, Symbols["level"])
+                elseif currentToken == "expr" or currentToken == "{{" then 
                     expr()
-                elseif parts[_] == "txt" or parts[_] == "text" then 
+                elseif currentToken == "txt" or currentToken == "text" then 
                     textrm()
                 else
                     addSymbol()
                 end
             end 
-            table.insert(Aparts, "\\end{cases}")
+            table.insert(result, "\\end{cases}")
 end 
 
 
 function substack() 
-            table.insert(Aparts, Symbols[parts[_]])
-                while _ <= #parts do
-                    _ = _ + 1 
-                    if parts[_] == "end" or parts[_] == ";" then
-                        break
-                    elseif parts[_] == "level" or parts[_] == "lvl" or parts[_] == "\\\\" then
-                        table.insert(Aparts, Symbols["level"])
-                    else
-                        checkForPrecedingSpace()
-                        addSymbol()
-                    end
+            table.insert(result, Symbols[currentToken])
+            while _ <= #tokens do
+                nextToken() 
+                if isEndSign(0) then
+                    break
+                elseif isNewLevel(0) then
+                    table.insert(result, Symbols["level"])
+                else
+                    checkForPrecedingSpace()
+                    addSymbol()
                 end
-                checkForPrecedingSpace()
-            table.insert(Aparts, Symbols["endsubstack"])
+            end
+            checkForPrecedingSpace()
+            table.insert(result, Symbols["endsubstack"])
 end
 
 function comment()
-    while _ <= #parts do
-        _ = _ + 1
-        if parts[_] == "##" then
-            _ = _ + 1 
+    while _ <= #tokens do
+        nextToken()
+        if currentToken == "##" then
+            nextToken() 
             break
         end
     end
 end
-function sumsandlimits() 
-            table.insert(Aparts, Symbols[parts[_]])
-            _ = _ + 1 
+
+function insertThree(charleft,charmid,charright)
+    table.insert(result,charleft)
+            nextToken() 
             skipSpaces()
             addSymbol()
-            table.insert(Aparts, "}^{")
-            _ = _ + 1 
+    table.insert(result,charmid)
+            nextToken() 
             skipSpaces()
             addSymbol()
-            table.insert(Aparts, "}")
+    table.insert(result,charright)
 end
 
 
--- Probably 
+function sigmaNotation() 
+            insertThree(Symbols[currentToken],"}^{","}")
+end
+
+
 function root() 
-            table.insert(Aparts, Symbols[parts[_]])
-            _ = _ + 1 
-        skipSpaces()
-            addSymbol()
-            table.insert(Aparts, "]{")
-            _ = _ + 1 
-        skipSpaces()
-            addSymbol()
-            table.insert(Aparts, "}")
+            insertThree(Symbols[currentToken],"]{","}")
 end
 
 function sqrt()
-        table.insert(Aparts, Symbols[parts[_]])
-            table.insert(Aparts, "]{")
-            _ = _ + 1 
+            table.insert(result, Symbols[currentToken])
+            table.insert(result, "]{")
+            nextToken() 
             skipSpaces()
             addSymbol()
-            table.insert(Aparts, "}")
+            table.insert(result, "}")
 end
 
 -- Continous fractions block
@@ -951,67 +1043,55 @@ function fraction()
             fracn = fracn + 1 
             confrac = true 
             checkForPrecedingSpace()
-            table.insert(Aparts, Symbols["fraction"])
-            _ = _ + 1 
+            table.insert(result, Symbols["fraction"])
+            nextToken() 
             skipSpaces()
             addSymbol()
-            table.insert(Aparts, "}")
-            table.insert(Aparts, "{")
+            table.insert(result, "}")
+            table.insert(result, "{")
             skipSpaces()
 end
 
 function endfractions()
             while fracn > 0 do 
                 fracn = fracn - 1 
-                table.insert(Aparts, "}")
+                table.insert(result, "}")
             end
             confrac = false
 end
 -- End of continous fractions block
 
-function curlyBracedSymbol()
+function decorate()
     checkForPrecedingSpace()
-    table.insert(Aparts, Symbols[parts[_]])
-    _ = _ + 1 
+    table.insert(result, Symbols[currentToken])
+    nextToken() 
     skipSpaces()
     addSymbol()
-    table.insert(Aparts, "}")
+    table.insert(result, "}")
 end 
 
-function doublyCurlyBracedSymbol()
+function coefSymbol()
     checkForPrecedingSpace()
     skipSpaces()
-            table.insert(Aparts, Symbols[parts[_]])
-            _ = _ + 1 
-        skipSpaces()
-            addSymbol()
-            table.insert(Aparts, "}{")
-            _ = _ + 1
-        skipSpaces()
-            addSymbol()
-            table.insert(Aparts, "}")
+    insertThree(Symbols[currentToken],"}{","}")
 end 
 
 function limit()
     checkForPrecedingSpace()
     skipSpaces()
-    table.insert(Aparts, Symbols[parts[_]])
-    _ = _ + 1 
-    skipSpaces()
-    addSymbol()
-    table.insert(Aparts, Symbols["->"])
-    _ = _ + 1
-    skipSpaces()
-    addSymbol()
-    table.insert(Aparts, "}")
+    insertThree(Symbols[currentToken],Symbols["->"],"}")
 end
 
 function mathbb()
-    table.insert(Aparts, "\\mathbb{")
-    table.insert(Aparts,parts[_]:sub(1,1))
-    table.insert(Aparts, "}")
-    _ = _ + 1
+    table.insert(result, "\\mathbb{")
+    table.insert(result,currentToken:sub(1,1))
+    table.insert(result, "}")
+    nextToken()
 end
+
+
+
+--PROGRAM INIT 
 color = nil
 spaces = true
 tabs = true 
@@ -1048,15 +1128,19 @@ if color then
 else
     Answer = ""
 end
+
 -- Global variables 
-parts = {};  -- User input tokens 
-Aparts = {}; -- Resulting answer tokens 
+--
+tokens = {};  -- User input tokens 
+result = {}; -- Resulting answer tokens 
 fracn = 0; -- Number of continous fractions.  
-confrac = false; -- Are there not yet closed continous fractions? 
-mswitcher = 0; -- Matrix type 
+confrac = false; -- Are there any opened continous fractions? 
+matrixEndSign = "" -- Matrix type 
 _ = 0; -- MOST IMPORTANT VARIABLE 
 End_Of_Expression = "."
+
 print("Insert expression: \n\n");
+
 local lines = {}
 while true do 
     expression = io.read("*l");
@@ -1070,7 +1154,7 @@ end
     
 
 
---Building table of tokens from a string provided by script user  
+--Building table of tokens from input provided by user  
 local delimiter; 
 for j,v in ipairs(lines) do
     delimiter = 1
@@ -1078,53 +1162,49 @@ for j,v in ipairs(lines) do
     while i <= v:len() do 
         if i == v:len() then
             if v:sub(i,i) == " " then
-                table.insert(parts,v:sub(delimiter, i-1))
+                table.insert(tokens,v:sub(delimiter, i-1))
+                nextToken()
             else
-                table.insert(parts,v:sub(delimiter, i))
+                table.insert(tokens,v:sub(delimiter, i))
+                nextToken()
             end
-            _ = _ + 1
+            nextToken()
         elseif v:sub(i,i) == " " or v:sub(i,i) == "\t" then 
-            table.insert(parts, v:sub(delimiter, i-1))
-            _ = _ + 1
+            table.insert(tokens, v:sub(delimiter, i-1))
+            nextToken()
             delimiter = i+1
             if v:sub(i,i) == " " and spaces then
-                if _ > 0 and parts[_] == "substack" or parts[_] == "cases" or parts[_] == "amatrix" or parts[_] == "matrix" or parts[_] == "|matrix" or parts[_] == "(matrix" or  parts[_] == "pmatrix" or parts[_] == "bmatrix" or parts[_] == "Bmatrix" or parts[_] == "vmatrix" or parts[_] == "Vmatrix" or parts[_] == "{matrix" or parts[_] == "[matrix" or parts[_] == "||matrix" then
-                    --
-                elseif i+1 <= v:len() then 
-                    if v:sub(i+1,i+1) == ";" then
-                        -- do nothing
-                    else
-                        table.insert(parts, ",,")
-                    end
+                if _ > 0 and currentToken == "substack" or currentToken == "cases" or isMember(currentToken,matrixAliases) then
+                    -- do nothing 
                 elseif i + 2 <= v:len() then 
                     if v:sub(i+1, i+2) == "}}" then
                         --do nothing
                     else
-                        table.insert(parts, ",,")
+                        table.insert(tokens, ",,")
                     end
                 elseif i + 3 <= v:len() then
                     if v:sub(i+1, i+3) == "end" then
                         --do nothing
                     else
-                        table.insert(parts, ",,")
+                        table.insert(tokens, ",,")
                     end
                 else
-                        table.insert(parts, ",,")
+                    table.insert(tokens, ",,")
                 end
-                _ = _ + 1
+                nextToken()
             elseif v:sub(i,i) == "\t" and tabs then 
-                table.insert(parts, "tab") 
-                _ = _ + 1
+                table.insert(tokens, "tab") 
+                nextToken()
             end 
         end
         ::continue::
         i = i + 1
     end
     if newlines then
-        if parts[_] == "tabular" or parts[_] == "substack" or parts[_] == "cases" or parts[_] == "amatrix" or parts[_] == "matrix" or parts[_] == "|matrix" or parts[_] == "(matrix" or  parts[_] == "pmatrix" or parts[_] == "bmatrix" or parts[_] == "Bmatrix" or parts[_] == "vmatrix" or parts[_] == "Vmatrix" or parts[_] == "{matrix" or parts[_] == "[matrix" or parts[_] == "||matrix" then 
+        if currentToken == "tabular" or currentToken == "substack" or currentToken == "cases" or isMember(currentToken,matrixAliases) then 
             -- do nothing
         else
-            table.insert(parts, "level")
+            table.insert(tokens, "level")
         end
     end
 end
@@ -1132,22 +1212,21 @@ end
 _ = 0 
 
 
-
-while _ <= #parts do  
-    _ = _ + 1
+while _ <= #tokens do  
+    nextToken()
     if confrac then
         skipSpaces()
-        if parts[_] == "level" then
-            _ = _ + 1
+        if currentToken == "level" then
+            nextToken()
         end
     end
     addSymbol()
 end 
  
 if confrac == true then 
-endfractions()
+    endfractions()
 end
 
-Answer = Answer .. table.concat(Aparts)
+Answer = Answer .. table.concat(result)
 print("Resulting expression: \n\n")
 print(Answer)
