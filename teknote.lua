@@ -365,6 +365,7 @@ Symbols = {
 ["wlevel"] = " \\\\ \\color{white}",
 ["wlvl"] = " \\\\ \\color{white}",
 ["endsubstack"] = "}} ",
+["sum"] = "\\sum ",
 ["O+"] = "\\bigoplus ",
 ["bigoplus"] = "\\bigoplus ",
 ["O."] = "\\bigodot ",
