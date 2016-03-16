@@ -365,7 +365,6 @@ Symbols = {
 ["wlevel"] = " \\\\ \\color{white}",
 ["wlvl"] = " \\\\ \\color{white}",
 ["endsubstack"] = "}} ",
-["sum"] = "\\sum ",
 ["O+"] = "\\bigoplus ",
 ["bigoplus"] = "\\bigoplus ",
 ["O."] = "\\bigodot ",
@@ -642,7 +641,7 @@ function nextToken()
 end
 
 function isFunction(command)
-    return isMember(command,miscAliases) or isMember(comment,coefAliases) or isMember(command,limitAliases) or isMember(command,decoratorAliases) or isMember(command,matrixAliases) or isMember(command,underbraceAliases) or isMember(command,overbraceAliases)
+    return isMember(command,sigmaAliases) or isMember(command,miscAliases) or isMember(comment,coefAliases) or isMember(command,limitAliases) or isMember(command,decoratorAliases) or isMember(command,matrixAliases) or isMember(command,underbraceAliases) or isMember(command,overbraceAliases)
 end
 
 
@@ -1086,7 +1085,7 @@ function mathbb()
     table.insert(result, "\\mathbb{")
     table.insert(result,currentToken:sub(1,1))
     table.insert(result, "}")
-    nextToken()
+    --nextToken()
 end
 
 
@@ -1096,6 +1095,7 @@ color = nil
 spaces = true
 tabs = true 
 newlines = true 
+silent=false
 local i = 1
 while i <= #arg do   
         if arg[i] == "-c" or arg[i] == "--color" then
@@ -1117,6 +1117,8 @@ while i <= #arg do
         elseif arg[i] == "-dy" or arg[i] == "--dictionary" then
             dictionary()
             os.exit(0)
+        elseif arg[i] == "-s" or arg[i] == "--silent" then
+            silent=true
         end
         i = i + 1
 end
@@ -1139,7 +1141,9 @@ matrixEndSign = "" -- Matrix type
 _ = 0; -- MOST IMPORTANT VARIABLE 
 End_Of_Expression = "."
 
-print("Insert expression: \n\n");
+if(not silent) then
+    print("Insert expression: \n\n");
+end
 
 local lines = {}
 while true do 
@@ -1228,5 +1232,7 @@ if confrac == true then
 end
 
 Answer = Answer .. table.concat(result)
-print("Resulting expression: \n\n")
+if (not silent) then
+    print("Resulting expression: \n\n")
+end
 print(Answer)
