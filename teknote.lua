@@ -1086,7 +1086,6 @@ function mathbb()
     table.insert(result, "\\mathbb{")
     table.insert(result,currentToken:sub(1,1))
     table.insert(result, "}")
-    --nextToken()
 end
 
 
