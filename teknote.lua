@@ -641,7 +641,7 @@ function nextToken()
 end
 
 function isFunction(command)
-    return isMember(command,sigmaAliases) or isMember(command,miscAliases) or isMember(comment,coefAliases) or isMember(command,limitAliases) or isMember(command,decoratorAliases) or isMember(command,matrixAliases) or isMember(command,underbraceAliases) or isMember(command,overbraceAliases)
+    return isMember(command,sigmaAliases) or isMember(command,miscAliases) or isMember(command,coefAliases) or isMember(command,limitAliases) or isMember(command,decoratorAliases) or isMember(command,matrixAliases) or isMember(command,underbraceAliases) or isMember(command,overbraceAliases)
 end
 
 
